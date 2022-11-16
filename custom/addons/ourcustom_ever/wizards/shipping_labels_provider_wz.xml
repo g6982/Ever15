@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="shipping_provider_wizard_form" model="ir.ui.view">
+            <field name="name">Generate shipping labels</field>
+            <field name="model">shipping.provider.wz</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="delivery_type"/>
+                            </group>
+                        </group>
+
+                        <group string="Posrlogistics" attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}">
+                            <group string="Misc.">
+                                <field
+                                    name="postlogistics_license_id"
+                                    attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                />
+                                <field
+                                    name="postlogistics_default_packaging_id"
+                                    attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                />
+                                <field
+                                    name="postlogistics_tracking_format"
+                                    attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                />
+                            </group>
+                            <group string="Template">
+                                <field
+                                    name="postlogistics_label_layout"
+                                    attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                />
+                                <field
+                                    name="postlogistics_output_format"
+                                    attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                />
+                                <field
+                                    name="postlogistics_resolution"
+                                    attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                />
+                            </group>
+                            <group string="Credentials" groups="base.group_system">
+                                <field
+                                    name="postlogistics_endpoint_url"
+                                    attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                />
+                                <field
+                                    name="postlogistics_client_id"
+                                    attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                />
+                                <field
+                                    name="postlogistics_client_secret"
+                                    attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                />
+                            </group>
+                        </group>
+
+                        <group string="DHL Express Configuration" attrs="{'invisible': [('delivery_type', '!=', 'dhl_express')]}">
+                            <group>
+                                <field name="company_id"></field>
+                                <field name="dhl_service_type"
+                                    attrs="{'required': [('delivery_type', '=', 'dhl_express')]}" />
+                                <field name="dhl_droppoff_type"
+                                    attrs="{'required': [('delivery_type', '=', 'dhl_express')]}" />
+                                <field name="dhl_weight_uom"
+                                    attrs="{'required': [('delivery_type', '=', 'dhl_express')]}" />
+                               <field name="dhl_dimension_unit" invisible="1"/>
+                                <field name="dhl_default_product_packaging_id"
+                                    attrs="{'required': [('delivery_type', '=', 'dhl_express')]}" />
+                            </group>
+                            <group>
+                                    <field name="dhl_shipping_label_type"
+                                        attrs="{'required': [('delivery_type', '=', 'dhl_express')]}" />
+                                    <field name="dhl_shipping_label_file_type"
+                                        attrs="{'required': [('delivery_type', '=', 'dhl_express')]}" />
+                                    <field name="dhl_is_dutiable"/>
+                                    <field name="dhl_duty_payment_type" attrs="{'invisible': [('dhl_is_dutiable', '=', False)],'required': [('dhl_is_dutiable', '=', True)]}"/>
+                                    <field name="dhl_region_code" attrs="{'required': [('delivery_type', '=', 'dhl_express')]}"/>
+                                    <field name="shipping_weight" attrs="{'required': [('delivery_type', '=', 'dhl_express')]}"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button name="action_launch" string="Generate" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_shipping_provider_wizard_form" model="ir.actions.act_window">
+            <field name="name">Generate shipping labels</field>
+            <field name="res_model">shipping.provider.wz</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

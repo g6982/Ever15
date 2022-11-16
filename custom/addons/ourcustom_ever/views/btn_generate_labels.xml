@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!--In Sale Order-->
+        <!--Quotations-->
+         <record id="quotation_btn_generate_labels" model="ir.ui.view">
+            <field name="name">quotation_btn_generate_labels</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='generate_invoices']" position="after">
+                    <button
+                        name="%(action_shipping_provider_wizard_form)d"
+                        string="Generate Labels"
+                        type="action"
+                        class="btn-primary buttons_space"
+                    />
+                </xpath>
+            </field>
+        </record>
+        <!--Orders-->
+        <record id="order_btn_generate_labels" model="ir.ui.view">
+            <field name="name">order_btn_generate_labels</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='generate_invoices']" position="after">
+                    <button
+                        name="%(action_shipping_provider_wizard_form)d"
+                        string="Generate Labels"
+                        type="action"
+                        class="btn-primary buttons_space"
+                    />
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</odoo>

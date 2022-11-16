@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="external_layout_standard_ever" inherit_id="web.external_layout_standard" >
+
+        <div t-if="company.logo or company.report_header" class="row zero_min_height" position="replace">
+            <!--Remove the black line -->
+        </div>
+         <div class="col-6" name="company_address" position="replace">
+             <!--Remove Company Adress-->
+         </div>
+         <div class="col-3 mb4" position="replace">
+             <!--Move Logo to the right + edit max-height-->
+             <div class="col-12 text-right">
+                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo" style="margin-right:120px;max-height: 100px;"/>
+             </div>
+         </div>
+        <div class="text-center" style="border-top: 1px solid black;" position="replace">
+
+        </div>
+    </template>
+    <template id="address_layout_ever" inherit_id="web.address_layout" >
+        <!--Move Address to left-->
+        <div class="address row" position="replace">
+
+        </div>
+        <!-- <div class="address row" position="replace">
+            <div class="address row" style="margin-left:7px;margin-top:-22px;font-size:15px">
+                <t t-if="information_block">
+                    <div name="information_block">
+                        <t t-out="information_block"/>
+                    </div>
+                </t>
+                <div name="address">
+                    <t t-esc="address"/>
+                </div>
+            </div>
+             <br/><br/><br/>
+        </div>-->
+    </template>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- For display the quotation cancel reason menu  -->
+        <record id="view_reason_new_tree" model="ir.ui.view">
+                <field name="name">quotation.cancel.reason.tree</field>
+                <field name="model">quotation.cancel.reason</field>
+                <field name="arch" type="xml">
+                    <tree string="Quotation Cancel Reason">
+                        <field name="name"></field>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="view_reason_new_form" model="ir.ui.view">
+                <field name="name">quotation.cancel.reason.form</field>
+                <field name="model">quotation.cancel.reason</field>
+                <field name="arch" type="xml">
+                    <form string="Quotation Cancel Reason">
+                        <sheet>
+                            <group>
+                                <field name="name"></field>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+
+        <record id="open_view_reason_new_tree" model="ir.actions.act_window">
+                <field name="name">Quotation Cancel Reason</field>
+                <field name="res_model">quotation.cancel.reason</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="view_reason_new_tree"></field>
+        </record>
+
+        <menuitem
+                id="menu_quotation_cancelation_reasons"
+                name="Quotation Cancel Reason" 
+                parent="sale.menu_sale_config"
+                action="open_view_reason_new_tree"/>
+</odoo>
+

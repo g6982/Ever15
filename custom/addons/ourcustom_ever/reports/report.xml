@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--Invoice with QR-->
+    <report
+        id="invoice_qr_fin_id"
+        string="INVOICE QR"
+        model="account.move"
+        report_type="qweb-pdf"
+        name="ourcustom_ever.report_to_invoice_qr_final"
+        file="ourcustom_ever.report_to_invoice_qr_final"
+        print_report_name="'Invoice - %s' % (object.name)"
+        paperformat="ourcustom_ever.paperformat_invoice_qr_fin"
+    />
+
+<!--Invoice with Table above-->
+    <report
+        id="invoice_square_fin_id"
+        string="INVOICE"
+        model="account.move"
+        report_type="qweb-pdf"
+        name="ourcustom_ever.report_to_invoice_square_final"
+        file="ourcustom_ever.report_to_invoice_square_final"
+        print_report_name="'Invoice - %s' % (object.name)"
+        paperformat="ourcustom_ever.paperformat_invoice_qr_fin"
+    />
+</odoo>

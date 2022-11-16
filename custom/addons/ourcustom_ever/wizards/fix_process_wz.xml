@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="fix_process_wizard_form" model="ir.ui.view">
+            <field name="name">Set Process</field>
+            <field name="model">fix.process.wz</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="process_wz" string="Process"/>
+                            </group>
+                        </group>
+
+
+                    </sheet>
+                    <footer>
+                        <button name="action_fix_process" string="Set Process" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_fix_process_wizard_form" model="ir.actions.act_window">
+            <field name="name">Set Process</field>
+            <field name="res_model">fix.process.wz</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

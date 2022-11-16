@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--Scheduled Action to Send Mail-->
+        <record id="ir_cron_send_stock_bellow_min_via_email" model="ir.cron">
+            <field name="name">Check Stock Quantity and Send Email</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">model.send_low_stock_via_email()</field>
+            <!--<field name="args" eval="'()'"/>-->
+        </record>
+
+        <!--Scheduled Action to Set is_bellow_min as True or false based on quantities-->
+        <record id="ir_cron_update_is_bellow_min" model="ir.cron">
+            <field name="name">Check Stock Quantity and Update Boolean Field</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">model.update_is_bellow_min_from_cron()</field>
+        </record>
+    </data>
+
+</odoo>

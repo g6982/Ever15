@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data><!-- Show Instance  -->
+        <record id="view_partner_form_inherit_ever" model="ir.ui.view">
+            <field name="name">view.partner.form.inherit.ever</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="woo_instance_id" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+        <!-- inherit search view to enable search by referece-->
+        <record id="view_partner_search_inherit_ever" model="ir.ui.view">
+            <field name="name">view.partner.search.inherit.ever</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="ref" string="Reference"/>
+                </field>
+            </field>
+        </record>
+        <!-- Show Ref in Tree View -->
+        <record id="ref_in_res_partner_tree" model="ir.ui.view">
+            <field name="name">ref.in.res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="country_id" position="after">
+                    <field name="ref" string="Reference"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

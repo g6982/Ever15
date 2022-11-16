@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<record id="dhl_jumbo_document" model="product.packaging">
+			<field name="name">Jumbo Document</field>
+			<field name="shipper_package_code">BD</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_jumbo_parcel" model="product.packaging">
+			<field name="name">Jumbo Parcel</field>
+			<field name="shipper_package_code">BP</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_customer_provided" model="product.packaging">
+			<field name="name">Customer-provided</field>
+			<field name="shipper_package_code">CP</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_document" model="product.packaging">
+			<field name="name">Document</field>
+			<field name="shipper_package_code">DC</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_flyer" model="product.packaging">
+			<field name="name">DHL Flyer</field>
+			<field name="shipper_package_code">DF</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_domestic" model="product.packaging">
+			<field name="name">Domestic</field>
+			<field name="shipper_package_code">DM</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_express_document" model="product.packaging">
+			<field name="name">Express Document</field>
+			<field name="shipper_package_code">ED</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_express_document" model="product.packaging">
+			<field name="name">Express Document</field>
+			<field name="shipper_package_code">ED</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_express_envelop" model="product.packaging">
+			<field name="name">DHL Express Envelope</field>
+			<field name="shipper_package_code">EE</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+
+		<record id="dhl_freight" model="product.packaging">
+			<field name="name">Freight</field>
+			<field name="shipper_package_code">FR</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_jumbo_box" model="product.packaging">
+			<field name="name">Jumbo box</field>
+			<field name="shipper_package_code">JB</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_jumbo_junior_document" model="product.packaging">
+			<field name="name">Jumbo Junior Document</field>
+			<field name="shipper_package_code">JD</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_junior_jumbo_box" model="product.packaging">
+			<field name="name">Junior jumbo Box</field>
+			<field name="shipper_package_code">JJ</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_jumbo_junior_parcel" model="product.packaging">
+			<field name="name">Jumbo Junior Parcel</field>
+			<field name="shipper_package_code">JP</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_other_packaging" model="product.packaging">
+			<field name="name">Other DHL Packaging</field>
+			<field name="shipper_package_code">OD</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_parcel" model="product.packaging">
+			<field name="name">Parcel</field>
+			<field name="shipper_package_code">PA</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+		<record id="dhl_your_packaging" model="product.packaging">
+			<field name="name">Your packaging</field>
+			<field name="shipper_package_code">YP</field>
+			<field name="package_carrier_type">dhl_express</field>
+		</record>
+	</data>
+</odoo>
+D

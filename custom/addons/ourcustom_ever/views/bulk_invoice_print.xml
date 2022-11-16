@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!--In Sale Order-->
+        <!--Quotations-->
+         <record id="sale_order_tree_bulk_invoices" model="ir.ui.view">
+            <field name="name">sale_order_tree_bulk_invoices</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree">
+                    <header>
+                        <button
+                            name="generate_invoices_square"
+                            string="Print Invoice"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                        <button
+                            name="generate_invoices"
+                            string="Print Invoice (QR)"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                         <!--<button
+                            name="generate_qrs"
+                            string="Print QR"
+                            type="object"
+                            class="btn-primary"
+                        />-->
+                        <!-- <button name="set_invoice_payment_status" string="status" type="object"/>-->
+
+                    </header>
+                </xpath>
+            </field>
+        </record>
+        <!--Orders-->
+        <record id="sale_order_tree_bulk_invoices_order" model="ir.ui.view">
+            <field name="name">sale_order_tree_bulk_invoices_order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree">
+                    <header>
+                        <button
+                            name="generate_invoices_square"
+                            string="Print Invoice"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                        <button
+                            name="generate_invoices"
+                            string="Print Invoice (QR)"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                         <!--<button
+                            name="generate_qrs"
+                            string="Print QR"
+                            type="object"
+                            class="btn-primary"
+                        />-->
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</odoo>

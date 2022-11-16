@@ -1,0 +1,1289 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ourcustom_ever
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-22 11:16+0000\n"
+"PO-Revision-Date: 2022-09-22 11:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ourcustom_ever
+#: model:ir.actions.report,print_report_name:ourcustom_ever.invoice_qr_fin_id
+#: model:ir.actions.report,print_report_name:ourcustom_ever.invoice_square_fin_id
+msgid "'Invoice - %s' % (object.name)"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__0
+msgid "0-LOGISTICS SERVICES"
+msgstr ""
+
+#. module: ourcustom_ever
+#: code:addons/ourcustom_ever/models/res_partner.py:0
+#: code:addons/ourcustom_ever/models/res_partner.py:0
+#: code:addons/ourcustom_ever/models/res_partner.py:0
+#: code:addons/ourcustom_ever/models/res_partner.py:0
+#, python-format
+msgid "000000"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__1
+msgid "1-DOMESTIC EXPRESS 12:00"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__2
+msgid "2-B2C"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__3
+msgid "3-B2C"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__4
+msgid "4-JETLINE"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__5
+msgid "5-SPRINTLINE"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__6x4_a4_pdf
+msgid "6X4_A4_PDF"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__6x4_pdf
+msgid "6X4_PDF"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__6x4_thermal
+msgid "6X4_thermal"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__7
+msgid "7-EXPRESS EASY"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__8
+msgid "8-EXPRESS EASY"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__8x4_a4_pdf
+msgid "8X4_A4_PDF"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__8x4_a4_tc_pdf
+msgid "8X4_A4_TC_PDF"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__8x4_ci_pdf
+msgid "8X4_CI_PDF"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__8x4_ci_thermal
+msgid "8X4_CI_thermal"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__8x4_pdf
+msgid "8X4_PDF"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__8x4_ru_a4_pdf
+msgid "8X4_RU_A4_PDF"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_type__8x4_thermal
+msgid "8X4_thermal"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__9
+msgid "9-EUROPACK"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid ""
+"<br/>\n"
+"\n"
+"                                                                        <span>Produktcode: </span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid ""
+"<br/>\n"
+"\n"
+"                                                                    <span>Produktcode: </span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid ""
+"<br/>\n"
+"\n"
+"                                                            <span>Produktcode: </span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+msgid ""
+"<br/>\n"
+"\n"
+"                                                <span>Produktcode: </span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid ""
+"<br/>\n"
+"                                                                <span>Produktcode: </span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.portal_invoice_page_inherit_eve
+msgid "<i class=\"fa fa-download\"/> herunterladen"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span class=\"myDiv\">Ihre Bestellung bei  </span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Acceptance point</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Account / Payable to</span><br/>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Amount</span><br/>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Currency</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Payable by</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Reference</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>0.00</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>Beschreibung</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>Bestellt</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>Einzelpreis</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>Geliefret</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>MWST</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>Menge</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span>Payment part</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>Pos.</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span>Receipt</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>Rückstand</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<span>Versand: Versandkosten</span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<strong style=\"font-size:14px\">Zahlungsbedingungen</strong>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "<strong><span style=\"font-size:18px\">Rechnung</span></strong>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<strong><span style=\"font-size:18px;\">Rechnung</span></strong>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_invoice_paid
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_partial_not_paid
+msgid "<strong>Betrag inkl. MWST</strong>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid ""
+"<strong>Herzlichen Dank für Ihren Auftrag.</strong> Bitte bezahlen Sie entweder per beigefügtem <strong>Einzahlungsschein</strong> oder überweisen Sie<br/>\n"
+"                                        den Rechnungsbetrag unter Angabe der <strong>Rechnungsnummer</strong> an: Eversmart products Handels GmbH | IBAN CH92 0900 0000 4149 3985 2\n"
+"                                        <br/>\n"
+"                                        Bitte beachten Sie, dass auf die Bestellung kein Widerrufsrecht besteht."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+msgid ""
+"<strong>Herzlichen Dank für Ihren Auftrag.</strong> Bitte bezahlen Sie entweder per beigefügtem <strong>Einzahlungsschein</strong> oder überweisen Sie<br/>\n"
+"                            den Rechnungsbetrag unter Angabe der <strong>Rechnungsnummer</strong> an: Eversmart products Handels GmbH | IBAN CH92 0900 0000 4149 3985 2\n"
+"                            <br/>\n"
+"                            Bitte beachten Sie, dass auf die Bestellung kein Widerrufsrecht besteht."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_invoice_paid
+msgid "<strong>Restbetrag</strong>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_invoice_paid
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_partial_not_paid
+msgid "<strong>Total</strong>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__a
+msgid "A-AUTO REVERSALS"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__postlogistics_tracking_format
+msgid ""
+"Allows you to define how the ItemNumber (the last 8 digits) of the tracking number will be generated:\n"
+"- Default postlogistics numbers: The webservice generates it for you.\n"
+"- Picking number with pack counter: Generate it using the digits of picking name and add the pack number. 2 digits forpack number and 6 digits for picking number. (eg. 07000042 for picking 42 and 7th pack"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_region_code__am
+msgid "Americas"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_region_code__ap
+msgid "Asia Pacific"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__b
+msgid "B-BREAKBULK EXPRESS"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__backorder_exist
+msgid "Backorder Exist"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__barcode_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_stock_picking__barcode_printed
+msgid "BarCode Printed"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "Bezahlt"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_stock_picking__weight_bulk
+msgid "Bulk Weight"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__c
+msgid "C-MEDICAL EXPRESS"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.fix_process_wizard_form
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.shipping_provider_wizard_form
+msgid "Cancel"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_dimension_unit__cm
+msgid "Centremetres"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__postlogistics_client_id
+msgid "Client ID"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__postlogistics_client_secret
+msgid "Client Secret"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__company_id
+msgid "Company"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_fix_process_wz__create_uid
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__create_uid
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_fix_process_wz__create_date
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__create_date
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.shipping_provider_wizard_form
+msgid "Credentials"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__d
+msgid "D-EXPRESS WORLDWIDE"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.shipping_provider_wizard_form
+msgid "DHL Express Configuration"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "Datum:"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_default_product_packaging_id
+msgid "Default Package Type"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__delivery_type
+msgid "Delivery Type"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_dimension_unit
+msgid "Dimension Unit"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__dhl_dimension_unit
+msgid "Dimension Unit of the Shipment."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_fix_process_wz__display_name
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__display_name
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_droppoff_type__da
+msgid "Door to Airport"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_droppoff_type__dd
+msgid "Door to Door"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_droppoff_type__dc
+msgid "Door to Door non-compliant"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.portal_invoice_page_inherit_eve
+msgid "Download"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_droppoff_type
+msgid "Drop-off Type"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_duty_payment_type
+msgid "DutyPayment Type"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__dhl_duty_payment_type
+msgid "DutyPaymentType element contains the method of duty and tax payment."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__e
+msgid "E-EXPRESS 9:00"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_file_type__epl2
+msgid "EPL2"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__postlogistics_endpoint_url
+msgid "Endpoint URL"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_region_code__eu
+msgid "Europe"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__f
+msgid "F-FREIGHT WORLDWIDE"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_account_move_line__shipping_method_title
+#: model:ir.model.fields,help:ourcustom_ever.field_sale_order_line__shipping_method_title
+msgid "Field contains 'shipping method title' or 'Fee lines names'"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_account_bank_statement_line__related_to_payment_journal
+#: model:ir.model.fields,help:ourcustom_ever.field_account_move__related_to_payment_journal
+#: model:ir.model.fields,help:ourcustom_ever.field_account_payment__related_to_payment_journal
+msgid "Field related to payment journal its added just to be used in group by"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__postlogistics_license_id
+msgid "Franking License"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "Fulfillment.swiss, Eversmart, Isenrietstr.19, 8617 Mönchaltorf"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__g
+msgid "G-DOMESTIC ECONOMY SELECT"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.shipping_provider_wizard_form
+msgid "Generate"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.order_btn_generate_labels
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.quotation_btn_generate_labels
+msgid "Generate Labels"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.actions.act_window,name:ourcustom_ever.action_shipping_provider_wizard_form
+msgid "Generate shipping labels"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_sale_order_search_inherit_ever
+msgid "Group By Ever"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__h
+msgid "H-ECONOMY SELECT"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__i
+msgid "I-DOMESTIC EXPRESS 9:00"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_fix_process_wz__id
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__id
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__id
+msgid "ID"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.actions.report,name:ourcustom_ever.invoice_square_fin_id
+msgid "INVOICE"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.actions.report,name:ourcustom_ever.invoice_qr_fin_id
+msgid "INVOICE QR"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__dhl_droppoff_type
+msgid "Identifies the method by which the package is to be tendered to DHL."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_dimension_unit__in
+msgid "Inches"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_sale_order__shipped_with
+msgid "Indicates shipping method used(DHL,POST...)"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__dhl_region_code
+msgid "Indicates the shipment to be route to the specific region."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__invoice_payment_status
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__related_invoice_payment_status
+msgid "Invoice Payment Status"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_sale_order_search_inherit_ever
+msgid "Invoice Payment status"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__invoice_preview_link
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__invoice_preview_link
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__invoice_preview_link
+msgid "Invoice Preview Link"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__invoice_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__invoice_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__invoice_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__invoice_printed
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__invoice_printed
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__invoice_printed
+msgid "Invoice Printed"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_report_ourcustom_ever_report_to_invoice_qr_final
+msgid "Invoice QR FIN"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.invoice_ref_search_view
+msgid "Invoice Ref"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__invoice_refs
+msgid "Invoice ref"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__invoice_qr_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__invoice_qr_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__invoice_qr_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__invoice_qr_printed
+msgid "Invoice(QR) Printed"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_is_dutiable
+msgid "Is Dutiable"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__dhl_is_dutiable
+msgid "IsDutiable element indicates whether the shipment is dutiable or not."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__j
+msgid "J-JUMBO BOX"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__k
+msgid "K-EXPRESS 9:00"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_weight_uom__kg
+msgid "KG"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "Kundennummer:"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__l
+msgid "L-EXPRESS 10:30"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_weight_uom__lb
+msgid "LB"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_file_type__lp2
+msgid "LP2"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_shipping_label_file_type
+msgid "Label File Type"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_shipping_label_type
+msgid "Label Stock Type"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__postlogistics_label_layout
+msgid "Label layout"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_fix_process_wz____last_update
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever____last_update
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_fix_process_wz__write_uid
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__write_uid
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_fix_process_wz__write_date
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__write_date
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.external_layout_standard_ever
+msgid "Logo"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__m
+msgid "M-EXPRESS 10:30"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_sale_order__backorder_exist
+msgid "Means the order has a Backorder(delivery not valid yet)"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.shipping_provider_wizard_form
+msgid "Misc."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__n
+msgid "N-DOMESTIC EXPRESS"
+msgstr ""
+
+#. module: ourcustom_ever
+#: code:addons/ourcustom_ever/models/bulk_invoice_print.py:0
+#: code:addons/ourcustom_ever/models/bulk_invoice_print.py:0
+#, python-format
+msgid "NO Invoices to print for selected records."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__new_order
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__new_order
+msgid "New Order"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__invoice_payment_status__not_paid
+msgid "Not Paid"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__nothing
+msgid "Nothing is deliverable"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__o
+msgid "O-DOMESTIC EXPRESS 10:30"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__shipped_with_optional
+msgid "Optional Shipped with"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__postlogistics_output_format
+msgid "Output format"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__p
+msgid "P-EXPRESS WORLDWIDE"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_file_type__pdf
+msgid "PDF"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__backorders
+msgid "Partial delivery"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__partial_delivery
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__partial_delivery
+msgid "Partially Delivered"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__payment_journal
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__related_to_payment_journal
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__payment_journal
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__related_to_payment_journal
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__payment_journal
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__related_to_payment_journal
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_account_filter_payment_journal
+msgid "Payment Journal"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.shipping_provider_wizard_form
+msgid "Posrlogistics"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__postlogistics_default_packaging_id
+msgid "Postlogistics Default Packaging"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "Preis in"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.sale_order_tree_bulk_invoices
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.sale_order_tree_bulk_invoices_order
+msgid "Print Invoice"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.sale_order_tree_bulk_invoices
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.sale_order_tree_bulk_invoices_order
+msgid "Print Invoice (QR)"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__process
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.fix_process_wizard_form
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_sale_order_search_inherit_ever
+msgid "Process"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_fix_process_wz__process_wz
+msgid "Process Wz"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__q
+msgid "Q-MEDICAL EXPRESS"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "QR-bill for invoice"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__string_data_qr
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__string_data_qr
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__string_data_qr
+msgid "Qr Data IMG"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__img_qr_path
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__img_qr_path
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__img_qr_path
+msgid "Qr Data Path"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__r
+msgid "R-GLOBALMAIL BUSINESS"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__ready_to_ship
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__ready_to_ship
+msgid "Ready to ship"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_duty_payment_type__r
+msgid "Receiver"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_res_partner__ref
+#: model:ir.model.fields,field_description:ourcustom_ever.field_res_users__ref
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.ref_in_res_partner_tree
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_partner_search_inherit_ever
+msgid "Reference"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_region_code
+msgid "Region Code"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__postlogistics_resolution
+msgid "Resolution"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__s
+msgid "S-SAME DAY"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_sale_order
+msgid "Sale Order"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_duty_payment_type__s
+msgid "Sender"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_service_type
+msgid "Service Type"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.actions.act_window,name:ourcustom_ever.action_fix_process_wizard_form
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.fix_process_wizard_form
+msgid "Set Process"
+msgstr ""
+
+#. module: ourcustom_ever
+#: code:addons/ourcustom_ever/models/shipping_labels.py:0
+#, python-format
+msgid ""
+"Shipment sent to carrier %(carrier_name)s for shipping with tracking number "
+"%(ref)s<br/>Cost: %(price).2f %(currency)s"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__shipped
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__shipped
+msgid "Shipped"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__shipped_with
+msgid "Shipped with"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move_line__shipping_method_title
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order_line__shipping_method_title
+msgid "Shipping / Fee Info"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__dhl_service_type
+msgid "Shipping Services those are accepted by DHL"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__shipping_weight
+msgid "Shipping Weight"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__dhl_shipping_label_file_type
+msgid "Specifies the type of lable formate."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__dhl_shipping_label_type
+msgid ""
+"Specifies the type of paper (stock) on which a document will be printed."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_res_partner__suspicious_customer
+#: model:ir.model.fields,field_description:ourcustom_ever.field_res_users__suspicious_customer
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__suspicious_customer
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_order_form_suspicious_customer
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_partner_form_suspicious_customer
+msgid "Suspicious Customer"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__t
+msgid "T-EXPRESS 12:00"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.shipping_provider_wizard_form
+msgid "Template"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_stock_picking__shipping_weight
+msgid ""
+"Total weight of packages and products not in a package. Packages with no "
+"shipping weight specified will default to their products' total weight. This"
+" is the weight used to compute the cost of the shipping."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_stock_picking__weight_bulk
+msgid "Total weight of products which are not in a package."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__postlogistics_tracking_format
+msgid "Tracking number format"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__u
+msgid "U-EXPRESS WORLDWIDE"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__postlogistics_tracking_format__postlogistics
+msgid "Use default postlogistics tracking numbers"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__postlogistics_tracking_format__picking_num
+msgid "Use picking number with pack counter"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__v
+msgid "V-EUROPACK"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__w
+msgid "W-ECONOMY SELECT"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__dhl_weight_uom
+msgid "Weight UOM"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_shipping_provider_wz__dhl_weight_uom
+msgid ""
+"Weight UOM of the Shipment. If select the weight UOM KG than package "
+"dimension consider Centimeter (CM), select the weight UOM LB than package "
+"dimension consider Inch (IN)."
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_stock_picking__shipping_weight
+msgid "Weight for Shipping"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__woo_lang_id
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__woo_lang_id
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__woo_lang_id
+msgid "Woo Instance Language"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.woo_order_ref_in_sale_tree
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.woo_order_ref_in_sale_tree_quot
+msgid "Woo Order Ref"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__woo_payment_method
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__woo_payment_method
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__woo_payment_method
+msgid "Woo Payment Method"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__woo_payment_code
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__woo_payment_code
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__woo_payment_code
+msgid "Woo Payment code"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__x
+msgid "X-EXPRESS ENVELOPE"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__y
+msgid "Y-EXPRESS 12:00"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_service_type__z
+msgid "Z-Destination Charges"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__dhl_shipping_label_file_type__zpl2
+msgid "ZPL2"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_invoice_document_preview
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "Zahlbar bis:"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_invoice_paid
+msgid "Zahlungseingang"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.tax_groups_totals_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.tax_groups_totals_partial_not_paid
+msgid "auf"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "bo"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "d-t"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,help:ourcustom_ever.field_sale_order__related_invoice_payment_status
+msgid "field created to show it in group by because it has to be stored"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_fix_process_wz
+msgid "fix.process.wz"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "kg"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "lb"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "lp"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "lra"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_ourcustom_ever
+msgid "ourcustom_ever"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "pa"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__invoice_payment_status__paid
+msgid "paid"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "rü"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_shipping_provider_wz
+msgid "shipping.provider.wz"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_square_fin
+msgid "spe"
+msgstr ""

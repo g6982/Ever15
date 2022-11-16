@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Ourcustom Ever',
+    'license': 'OPL-1',
+    'category': 'Extra Tools',
+    'summary': '',
+    'version': '15.0.0.7',
+
+    'author': 'ENSWORK',
+    'website': 'https://www.enswork.com/',
+    'depends': ['base', 'account', 'l10n_ch', 'web', 'ourcustom_slno_in_line_wp', 'woo_commerce_ept', 'contacts', 'sale', 'product',
+                'delivery_postlogistics'],
+    'data': [
+        'data/sequence.xml',
+        'security/ir.model.access.csv',
+        'data/paper_format.xml',
+        'views/skip_backorder.xml',
+        'views/res_partner.xml',
+        'views/invoice_ref_in_sale.xml',
+        'views/fields.xml',
+        'views/website_nav_bar_template_inherit.xml',
+        'views/invoice_preview.xml',
+        'views/order_reference_in_sale.xml',
+        'views/suspicious_customer.xml',
+        'views/account_move_qr_view.xml',
+        'views/sale_order_process.xml',
+        'views/invoice_shipping_lines_view.xml',
+        'views/external_layout_standard.xml',
+        'reports/inherit_report_invoice_document.xml',
+        'reports/inherit_swiss_qr_report.xml',
+        'views/account_move_view.xml',
+        'views/account_move_tree_view.xml',
+        'reports/report_to_invoice_qr_fin.xml',
+        'reports/report_to_invoice_square_fin.xml',
+        'views/bulk_invoice_print.xml',
+        'wizards/shipping_labels_provider_wz.xml',
+        'views/btn_generate_labels.xml',
+        'views/btn_check_records.xml',
+        'wizards/fix_process_wz.xml',
+        'views/btn_fix_process.xml',
+        'reports/report.xml',
+    ],
+
+    'assets': {
+        'web.report_assets_common': [
+                    #'ourcustom_ever/static/src/scss/**/*',
+                ],
+        'web._assets_bootstrap': [
+                    'ourcustom_ever/static/src/scss/style.scss',
+                ],
+    },
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+    'active': False,
+
+}

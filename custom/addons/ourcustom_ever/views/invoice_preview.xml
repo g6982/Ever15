@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--form-->
+        <record id="invoice_preview_link" model="ir.ui.view">
+            <field name="name">invoice_preview_link</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@id='other_tab']/group[@id='other_tab_group']/group[@name='sale_info_group']/field[@name='partner_bank_id']" position="after">
+                    <field name="invoice_preview_link" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--Invoice Portal Preview Template-->
+        <template id="portal_invoice_page_inherit_eve" inherit_id="account.portal_invoice_page">
+        <xpath expr="//t[@t-set='entries']/ul/li[1]" position="replace">
+             <li class="list-group-item flex-grow-1">
+                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                    <div class="btn-group  flex-grow-1 mr-1 mb-1">
+                        <t t-set="invoice_name" t-value="invoice.name"/>
+                        <a class="btn btn-secondary btn-block o_download_btn" t-att-href="invoice.sudo().get_download_invoice_url()" title="Download"><i class="fa fa-download"/> herunterladen</a> <!--target="_blank"-->
+                    </div>
+                    <!--<div class="btn-group flex-grow-1 mb-1">
+                        <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print" t-att-href="invoice.get_download_invoice_url()" id="print_invoice_report" title="Print" target="_blank"><i class="fa fa-print"/> Print</a>
+                    </div>-->
+                </div>
+            </li>
+        </xpath>
+        </template>
+    </data>
+</odoo>

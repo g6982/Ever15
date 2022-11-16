@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <!-- STOCK BELLOW MIN Treeview  -->
+    <record id="stock_bellow_min_tree_view" model="ir.ui.view">
+      <field name="name">stock_bellow_min_tree_view</field>
+      <field name="model">product.template</field>
+      <field name="arch" type="xml">
+        <tree create="false" delete="false" decoration-danger="qty_available &lt;=0"> <!--Note: &lt; means '<'-->
+          <field name="default_code"/>
+          <field name="name"/>
+          <field name="type" invisible="1"/>
+          <field name="qty_available"/>
+          <field name="stock_min_qty"/>
+          <field name="is_bellow_min" invisible="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <!--we need an ACTION to call this view-->
+    <record id="action_stock_bellow_min" model="ir.actions.act_window">
+        <field name="name">Stock bellow min</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree</field>
+        <field name="target">current</field>
+        <field name="domain">[('is_bellow_min','=', True),('detailed_type','=', 'product')]</field>
+        <field name="view_id" ref="stock_bellow_min_tree_view"/>
+    </record>
+
+
+    <menuitem
+            id="menu_stock_bellow_min_id"
+            name="Stock bellow min"
+            sequence="40"
+            action="action_stock_bellow_min"
+            parent="sale.product_menu_catalog"/>
+</odoo>

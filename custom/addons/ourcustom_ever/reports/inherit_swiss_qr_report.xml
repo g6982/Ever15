@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="inherit_swiss_qr_report" inherit_id="l10n_ch.l10n_ch_swissqr_template">
+        <t t-set="additional_info" position="replace">
+            <!-- Remove Additional Info -->
+        </t>
+        <img src="/l10n_ch/static/src/img/scissors_v.png" class="scissors vertical_scissors" position="replace">
+
+        </img>
+        <xpath expr="//div[@class='swissqr_body']/div[@id='indications_zone']" position="after">
+            <style>
+
+                    .vertical_scissors_bas {
+                        position: absolute;
+                        top: 113mm ;
+                        left: -5mm;
+                    }
+            </style>
+            <img src="/ourcustom_ever/static/src/img/scissors_vb.png" class="scissors vertical_scissors_bas"/>
+        </xpath>
+    </template>
+</odoo>

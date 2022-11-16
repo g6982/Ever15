@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_to_invoice_square_final">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <!--Invoice language will be based on site/instance language-->
+                <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.woo_lang_id.code"/>
+                <t t-call="ourcustom_ever.report_to_invoice_square_fin" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+
+
+       <template id="report_to_invoice_square_fin">
+            <!--<t t-call="web.html_container">-->
+               <!-- <t t-foreach="docs" t-as="o">-->
+                    <!--<t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.woo_lang_id.code"/>-->
+                    <t t-call="web.external_layout">
+                        <t t-set="o" t-value="o.with_context(lang='lang')" />
+                        <!--<t t-set="forced_vat" t-value="o.fiscal_position_id.foreign_vat"/>--> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
+                        <!--<t t-set="address">
+                            <p style="color:#38393b;text-decoration:underline;font-size:12px">Fulfillment.swiss, Eversmart, Isenrietstr.19, 8617 Mönchaltorf</p>
+                            <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                        </t>-->
+                        <div class="page" name="second_invoice">
+                            <style>
+                                td#square {
+                                  height: 40px;
+                                  vertical-align: top;
+                                  border:1px solid gray;
+                                }
+
+                                .carret{
+                                    display:inline-block;
+                                    border:1px solid #595958;
+                                    width:12px;
+                                    height:12px;
+                                    }
+                            </style>
+                                <table style="width:95%">
+                                    <tr>
+                                        <td  style="width:55%">
+                                             <div name="address" style="width:80mm;height:45mm;">
+                                                <!--<t t-esc="address"/>-->
+                                                <p style="color:#38393b;text-decoration:underline;font-size:11px">Fulfillment.swiss, Eversmart, Isenrietstr.19, 8617 Mönchaltorf</p>
+                                                <span t-field="o.partner_id.name"/><br/>
+                                                <span t-field="o.partner_id.street"/>&#032;<span t-field="o.partner_id.street2"/><br/>
+                                                <span t-field="o.partner_id.zip"/>&#032;<span t-field="o.partner_id.city"/>&#032;<span t-field="o.partner_id.state_id"/><br/>
+                                                <span t-field="o.partner_id.country_id"></span>
+                                            </div>
+                                        </td>
+                                        <td  style="width:40%">
+                                            <table style="width:100%">
+                                                <tr>
+                                                   <td id="square">rü</td>
+                                                   <td id="square" style="width:20%;">pa</td>
+                                                   <td id="square" style="width:25%">kg</td>
+                                                   <td id="square" style="width:35%">spe</td>
+                                                </tr>
+                                                <tr style="height: 60px;">
+                                                   <td id="square" style="width:20%">lp</td>
+                                                   <td id="square" style="width:20%;">lb</td>
+                                                   <td id="square" colspan="2">d-t</td>
+                                                </tr>
+                                                <tr>
+                                                 <td id="square" >pa</td>
+                                                 <td id="square" rowspan="2" colspan="3">lra</td>
+                                                </tr>
+                                                 <tr style="border: 1px solid red;height: 50px;">
+                                                 <td id="square" >bo</td>
+                                                </tr>
+                                              </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <h2>
+                                    <strong><span style="font-size:18px">Rechnung</span></strong>
+                                    <strong><span style="font-size:18px" t-if="o.name != '/'" t-field="o.name"/></strong>
+                                </h2>
+
+                                <style>
+                                    .text_capitalize_mod::first-letter{
+                                          text-transform: capitalize;
+                                    }
+
+                                    .myDiv {
+                                        display: inline-block;
+                                        font-weight:900;
+                                        }
+                                 </style>
+
+                                <!--Add borders to these informations bellow-->
+                                <table style="width:100%;border: 1px solid black;border-left:none;border-right:none">
+                                    <tr style="border: 1px solid black;border-left:none;border-right:none">
+                                        <td colspan="4" style="vertical-align:middle;">
+                                            <strong><span class="myDiv">Ihre Bestellung bei &#160;</span><span class="text_capitalize_mod myDiv"  t-field="o.woo_instance_id.sudo().name"/>&#160;<span t-field="o.ref"/></strong>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: 1px solid black;border-left:none;border-right:none;border-bottom:none">
+                                        <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                            <p name="invoice_date">Datum:</p>
+                                            <p name="customer_code" style="margin-top:-15px;margin-bottom:0px">Kundennummer:</p>
+                                        </td>
+                                        <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                            <p t-field="o.invoice_date" t-options='{"format": "dd.MM.yyyy"}'/>
+                                            <p style="margin-top:-15px;margin-bottom:0px" t-field="o.partner_id.ref"/>
+                                        </td>
+                                        <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                            <p name="due_date">Zahlbar bis:</p>
+                                        </td>
+                                        <!-- If The invoice is Paid show 'Paid' else show date-->
+                                        <t t-if="o.payment_state == 'paid'">
+                                            <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                                <p>Bezahlt</p>
+                                            </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                                <p t-field="o.invoice_date_due" t-options='{"format": "dd.MM.yyyy"}'/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </table>
+
+                                <!-- TABLE PRINCIPALE (Remimber there is 3 tables based on conditions) -->
+                                    <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
+                                    <t t-set="display_tax" t-value="any(l.tax_ids for l in o.invoice_line_ids)"/>
+                                    <!-- Manage Partial Delivery
+                                        CHECK IF THE SaleOrder LINKED WAS A BACKORDER, TO ADD QTY DELIVERED & REMAINING AND CHOOSE TO SHOW ALL PRODUCTS OR JUST THE ONES DELIVERED-->
+                                    <t t-set="back_check" t-value="o.its_a_backorder(o.id)"/>
+                                    <t t-set="backorder_exist" t-value="back_check['backorder_exist']"/>
+
+                                <t t-if="backorder_exist == True">
+                                    <!--CASE 1: PAID  => In Partial Delivery: If Invoice is "Paid" we should show normally All Products + Different quantities-->
+                                    <t t-if="o.payment_state == 'paid'">
+                                        <table class="table table-sm o_main_table" name="back_invoice_line_table_paid" style="border-color:black;font-size:15px">
+                                            <thead>
+                                                <tr style="border-color:black">
+                                                    <th name="th_sl_no" class="text-left" style="width:9%"><span>Pos.</span></th>
+                                                    <th name="th_description" class="text-left"><span>Beschreibung</span></th>
+
+                                                    <!--Partial Delivery Changes-->
+                                                    <th name="th_quantity_ordered" class="text-right" style="width:8%"><span>Bestellt</span></th>
+                                                    <th name="th_quantity_delivered" class="text-right" style="width:8%"><span>Geliefret</span></th>
+                                                    <th name="th_quantity_remaining" class="text-right" style="width:8%"><span>Rückstand</span></th>
+                                                    <!--Partial Delivery FIN!-->
+
+                                                    <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:16%"><span>Einzelpreis</span></th>
+                                                    <th name="th_subtotal" class="text-right" style="width:16%">
+                                                        <span groups="account.group_show_line_subtotals_tax_excluded">Preis in <span t-field="o.currency_id.name"/></span>
+                                                        <span groups="account.group_show_line_subtotals_tax_included">Preis in <span t-field="o.currency_id.name"/></span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice_tbody">
+                                                <t t-set="current_subtotal" t-value="0"/>
+                                                <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                                                <t t-foreach="lines" t-as="line">
+                                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                                    <tr style="border-color:black;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                                        <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                                            <td name="sl_no_line"  style="width:9%;border-color:black;padding-bottom:0px"><span t-field="line.sl_no"/></td>
+                                                            <td name="account_invoice_line_name" style="border-color:black;padding-bottom:0px">
+                                                                <t t-if="line.product_id.default_code in ('woo_shipping_fees', 'woo_fees')">
+                                                                    <t t-if="line.shipping_method_title">
+                                                                         <span t-field="line.shipping_method_title"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span>Versand: Versandkosten</span>
+                                                                    </t>
+                                                                </t>
+                                                                <t t-if="line.product_id.default_code == 'woo_discount'">
+                                                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                                </t>
+                                                                <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                    <strong><span t-field="line.product_id.name" t-options="{'widget': 'text'}"/></strong>
+                                                                    <br/>
+
+                                                                    <span>Produktcode: </span>
+                                                                    <span t-field="line.product_id.default_code" t-options="{'widget': 'text'}"/>
+                                                                    <!--Components Code-->
+                                                                    <br/>
+                                                                    <t t-set="components" t-value="o.get_components(line.product_id)"/>
+                                                                    <t t-foreach="components" t-as="component">
+                                                                        <span style="color:white">Produktcode: </span><!--it's not showing it's used just to have the same space before code-->
+                                                                        <span t-esc="component.get('component_code')"/>&#160;<span class="carret"/>
+                                                                        <br/>
+                                                                    </t>
+                                                                </t>
+                                                             </td>
+
+                                                            <!--Partial Delivery Changes-->
+
+                                                            <t t-set="result" t-value="o.get_quantities(o.id,line.id)"/>
+                                                            <t t-set="delivered" t-value="result['delivered']"/>
+                                                            <t t-set="remaining" t-value="result['remaining']"/>
+
+                                                            <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_ordered">
+                                                                <span t-field="line.quantity"/>
+                                                                <!--Components QTY-->
+                                                                <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                    <br/><br/>
+                                                                    <t t-foreach="components" t-as="component">
+                                                                        <span t-esc="'%.2f'% component.get('component_qty')"/>&#160;<span class="carret"/>
+                                                                        <br/>
+                                                                    </t>
+                                                                </t>
+                                                            </td>
+                                                            <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_delivered">
+                                                                <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                     <span t-esc="'%.2f'% delivered"/>&#160;<span class="carret"/>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span t-field="line.quantity"/>&#160;<span class="carret"/>
+                                                                </t>
+                                                            </td>
+                                                            <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_remaining">
+                                                                <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                    <span t-esc="'%.2f'% remaining"/>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span>0.00</span>
+                                                                </t>
+
+                                                            </td>
+                                                            <!--Partial Delivery FIN!-->
+
+                                                            <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:16%;border-color:black;padding-bottom:0px">
+                                                                <span class="text-nowrap" t-field="line.price_unit"/>
+                                                            </td>
+                                                            <td class="text-right o_price_total" style="width:16%;border-color:black;padding-bottom:0px">
+                                                                <span class="text-nowrap" t-esc="'%.2f'% line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                <span class="text-nowrap" t-esc="'%.2f'% line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                            </td>
+                                                        </t>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                        <div class="clearfix">
+                                            <!--<div id="total" class="row">-->
+                                            <div id="total" class="">
+                                                <!--<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">-->
+                                                <div>
+                                                    <table class="table table-sm" style="page-break-inside: avoid;width:100%;">
+                                                        <!--Tax totals-->
+                                                        <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                                        <t t-if="o.payment_state == 'paid'">
+                                                            <t t-call="ourcustom_ever.document_tax_totals_invoice_paid"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <t t-call="account.document_tax_totals"/>
+                                                        </t>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+
+
+
+                                    <!--CASE 2: NOT  PAID  => In Partial Delivery: If Invoice is NOT Paid yet we should show JUST DELIVERED PRODUCTS +Their totals+ Different quantities-->
+
+                                    <t t-if="o.payment_state != 'paid'">
+                                         <!--Total of Delivered Products-->
+                                        <t t-set="total_delivered" t-value="0"/>
+
+                                        <table class="table table-sm o_main_table" name="back_invoice_line_table_not_paid" style="border-color:black;font-size:15px">
+                                            <thead>
+                                                <tr style="border-color:black">
+                                                    <th name="th_sl_no" class="text-left" style="width:9%"><span>Pos.</span></th>
+                                                    <th name="th_description" class="text-left"><span>Beschreibung</span></th>
+
+                                                    <!--Partial Delivery Changes-->
+                                                    <th name="th_quantity_ordered" class="text-right" style="width:8%"><span>Bestellt</span></th>
+                                                    <th name="th_quantity_delivered" class="text-right" style="width:8%"><span>Geliefret</span></th>
+                                                    <th name="th_quantity_remaining" class="text-right" style="width:8%"><span>Rückstand</span></th>
+                                                    <!--Partial Delivery FIN!-->
+
+                                                    <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:14%"><span>Einzelpreis</span></th>
+
+                                                    <th t-if="display_tax" name="th_tax_group" class="text-center" style="width:8%"><span>MWST</span></th>
+
+                                                    <th name="th_subtotal" class="text-right" style="width:14%">
+                                                        <span groups="account.group_show_line_subtotals_tax_excluded">Preis in <span t-field="o.currency_id.name"/></span>
+                                                        <span groups="account.group_show_line_subtotals_tax_included">Preis in <span t-field="o.currency_id.name"/></span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice_tbody">
+                                                <t t-set="current_subtotal" t-value="0"/>
+                                                <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                                                <!--Manage Line Number: we will use this variable incremented instead of the default one: line.sl_no-->
+                                                <t t-set="line_number" t-value="1"/>
+
+                                                <t t-foreach="lines" t-as="line">
+                                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                                     <!--Partial Delivery Changes-->
+                                                    <t t-set="result" t-value="o.get_quantities(o.id,line.id)"/>
+                                                    <t t-set="delivered" t-value="result['delivered']"/>
+                                                    <t t-set="remaining" t-value="result['remaining']"/>
+                                                    <t t-set="total_of_delivered_products" t-value="result['total_of_delivered_products']"/>
+
+                                                     <!--We Will show product just if it has been delivered partially or completely-->
+                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'} and delivered > 0">
+                                                        <tr style="border-color:black;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                                            <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                                                <td name="sl_no_line"  style="width:9%;border-color:black;padding-bottom:0px"><span t-esc="line_number"/></td>
+                                                                <td name="account_invoice_line_name" style="border-color:black;padding-bottom:0px">
+                                                                    <t t-if="line.product_id.default_code in ('woo_shipping_fees', 'woo_fees')">
+                                                                        <t t-if="line.shipping_method_title">
+                                                                             <span t-field="line.shipping_method_title"/>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span>Versand: Versandkosten</span>
+                                                                        </t>
+                                                                    </t>
+                                                                    <t t-if="line.product_id.default_code == 'woo_discount'">
+                                                                        <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                                    </t>
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <strong><span t-field="line.product_id.name" t-options="{'widget': 'text'}"/></strong>
+                                                                        <br/>
+
+                                                                        <span>Produktcode: </span>
+                                                                        <span t-field="line.product_id.default_code" t-options="{'widget': 'text'}"/>
+                                                                        <!--Components Code-->
+                                                                        <br/>
+                                                                        <t t-set="components" t-value="o.get_components(line.product_id)"/>
+                                                                        <t t-foreach="components" t-as="component">
+                                                                            <span style="color:white">Produktcode: </span><!--it's not showing it's used just to have the same space before code-->
+                                                                            <span t-esc="component.get('component_code')"/>&#160;<span class="carret"/>
+                                                                            <br/>
+                                                                        </t>
+                                                                    </t>
+                                                                 </td>
+
+                                                                <!--Partial Delivery Changes-->
+
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_ordered">
+                                                                    <span t-field="line.quantity"/>
+                                                                    <!--Components QTY-->
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <br/><br/>
+                                                                        <t t-foreach="components" t-as="component">
+                                                                            <span t-esc="'%.2f'% component.get('component_qty')"/>&#160;<span class="carret"/>
+                                                                            <br/>
+                                                                        </t>
+                                                                    </t>
+                                                                </td>
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_delivered">
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                         <span t-esc="'%.2f'% delivered"/>&#160;<span class="carret"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span t-field="line.quantity"/>&#160;<span class="carret"/>
+                                                                    </t>
+                                                                </td>
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_remaining">
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <span t-esc="'%.2f'% remaining"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span>0.00</span>
+                                                                    </t>
+
+                                                                </td>
+                                                                <!--Partial Delivery FIN!-->
+
+                                                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:14%;border-color:black;padding-bottom:0px">
+                                                                    <span class="text-nowrap" t-field="line.price_unit"/>
+                                                                </td>
+
+                                                                <td t-if="display_tax" name="td_tax_group"  style="width:8%;border-color:black;padding-bottom:0px" class="text-center">
+                                                                    <t t-foreach="line.tax_ids" t-as="tax">
+                                                                        <span t-esc="tax.amount"/><sapn>%</sapn>&#160;
+                                                                         <!--Manage Translate of TVA-->
+                                                                        <!--<t t-if="o.woo_lang_id.code == 'de_DE'">
+                                                                            <span t-esc="tax.tax_group_id.name.replace('TVA', 'MWST')"/>&#160;
+                                                                        </t>
+                                                                        <t t-elif="o.woo_lang_id.code == 'en_US'">
+                                                                            <span t-esc="tax.tax_group_id.name.replace('TVA', 'VAT')"/>&#160;
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span  t-esc="tax.tax_group_id.name"/>&#160;
+                                                                        </t>-->
+                                                                    </t>
+                                                                </td>
+
+                                                                <td class="text-right o_price_total" style="width:14%;border-color:black;padding-bottom:0px">
+                                                                    <t t-if="delivered == line.quantity">
+                                                                        <span class="text-nowrap" t-esc="'%.2f'% line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                        <span class="text-nowrap" t-esc="'%.2f'% line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                                    </t>
+                                                                    <t t-if="delivered != line.quantity">
+                                                                        <span t-esc="'%.2f'% total_of_delivered_products"/>
+                                                                    </t>
+                                                                </td>
+
+                                                                 <!--UPDATE Total of Delivered Products-->
+                                                                <t t-if="delivered == line.quantity">
+                                                                    <t t-set="total_delivered" t-value="total_delivered+line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                    <t t-set="total_delivered" t-value="total_delivered+line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                                </t>
+                                                                <t t-if="delivered != line.quantity">
+                                                                     <t t-set="total_delivered" t-value="total_delivered+total_of_delivered_products"/>
+                                                                </t>
+
+                                                            </t>
+                                                        </tr>
+                                                         <!--Manage Line Number:-->
+                                                         <t t-set="line_number" t-value="line_number + 1"/>
+                                                    </t>
+                                                    <!--If it's just a discount or shipping line just show it without checking qty-->
+                                                    <t t-elif="line.product_id.default_code in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                        <tr style="border-color:black;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                                            <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                                                <td name="sl_no_line"  style="width:9%;border-color:black;padding-bottom:0px"><span t-esc="line_number"/></td>
+                                                                <td name="account_invoice_line_name" style="border-color:black;padding-bottom:0px">
+                                                                    <t t-if="line.product_id.default_code in ('woo_shipping_fees', 'woo_fees')">
+                                                                        <t t-if="line.shipping_method_title">
+                                                                             <span t-field="line.shipping_method_title"/>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span>Versand: Versandkosten</span>
+                                                                        </t>
+                                                                    </t>
+                                                                    <t t-if="line.product_id.default_code == 'woo_discount'">
+                                                                        <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                                    </t>
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <strong><span t-field="line.product_id.name" t-options="{'widget': 'text'}"/></strong>
+                                                                        <br/>
+
+                                                                        <span>Produktcode: </span>
+                                                                        <span t-field="line.product_id.default_code" t-options="{'widget': 'text'}"/>
+                                                                        <!--Components Code-->
+                                                                        <br/>
+                                                                        <t t-set="components" t-value="o.get_components(line.product_id)"/>
+                                                                        <t t-foreach="components" t-as="component">
+                                                                            <span style="color:white">Produktcode: </span><!--it's not showing it's used just to have the same space before code-->
+                                                                            <span t-esc="component.get('component_code')"/>&#160;<span class="carret"/>
+                                                                            <br/>
+                                                                        </t>
+                                                                    </t>
+                                                                 </td>
+
+                                                                <!--Partial Delivery Changes-->
+
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_ordered">
+                                                                    <span t-field="line.quantity"/>
+                                                                    <!--Components QTY-->
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <br/><br/>
+                                                                        <t t-foreach="components" t-as="component">
+                                                                            <span t-esc="'%.2f'% component.get('component_qty')"/>&#160;<span class="carret"/>
+                                                                            <br/>
+                                                                        </t>
+                                                                    </t>
+                                                                </td>
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_delivered">
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                         <span t-esc="'%.2f'% delivered"/>&#160;<span class="carret"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span t-field="line.quantity"/>&#160;<span class="carret"/>
+                                                                    </t>
+                                                                </td>
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_remaining">
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <span t-esc="'%.2f'% remaining"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span>0.00</span>
+                                                                    </t>
+
+                                                                </td>
+                                                                <!--Partial Delivery FIN!-->
+
+                                                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:14%;border-color:black;padding-bottom:0px">
+                                                                    <span class="text-nowrap" t-field="line.price_unit"/>
+                                                                </td>
+
+                                                                <td t-if="display_tax" name="td_tax_group"  style="width:8%;border-color:black;padding-bottom:0px" class="text-center">
+                                                                    <t t-foreach="line.tax_ids" t-as="tax">
+                                                                        <span t-esc="tax.amount"/><sapn>%</sapn>&#160;
+                                                                         <!--Manage Translate of TVA-->
+                                                                        <!--<t t-if="o.woo_lang_id.code == 'de_DE'">
+                                                                            <span t-esc="tax.tax_group_id.name.replace('TVA', 'MWST')"/>&#160;
+                                                                        </t>
+                                                                        <t t-elif="o.woo_lang_id.code == 'en_US'">
+                                                                            <span t-esc="tax.tax_group_id.name.replace('TVA', 'VAT')"/>&#160;
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span  t-esc="tax.tax_group_id.name"/>&#160;
+                                                                        </t>-->
+                                                                    </t>
+                                                                </td>
+
+                                                                <td class="text-right o_price_total" style="width:14%;border-color:black;padding-bottom:0px">
+                                                                    <span class="text-nowrap" t-esc="'%.2f'% line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                    <span class="text-nowrap" t-esc="'%.2f'% line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                                </td>
+
+                                                                 <!--UPDATE Total of Delivered Products-->
+                                                                <t t-set="total_delivered" t-value="total_delivered+line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                <t t-set="total_delivered" t-value="total_delivered+line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                            </t>
+                                                        </tr>
+                                                        <!--Manage Line Number:-->
+                                                         <t t-set="line_number" t-value="line_number + 1"/>
+                                                    </t>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                        <div class="clearfix">
+                                            <!--<div id="total" class="row">-->
+                                            <div id="total" class="">
+                                                <!--<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">-->
+                                                <div>
+                                                    <table class="table table-sm" style="page-break-inside: avoid;width:100%;">
+                                                        <!--Tax totals-->
+                                                        <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                                        <t t-if="o.payment_state == 'paid'">
+                                                            <t t-call="ourcustom_ever.document_tax_totals_invoice_paid"/>
+                                                        </t>
+                                                       <!-- <t t-else="">
+                                                            <t t-call="account.document_tax_totals"/>
+                                                        </t>-->
+                                                        <t t-else="">
+                                                            <t t-call="ourcustom_ever.document_tax_totals_partial_not_paid"/>
+                                                        </t>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                               </t>
+
+                                <!--ELSE : NORMAL TABLE (No Bakorder  -> No partial delivery managed)-->
+                               <t t-if="backorder_exist == False">
+                                    <table class="table table-sm o_main_table" name="invoice_line_table" style="border-color:black;font-size:15px">
+                                        <thead>
+                                            <tr style="border-color:black">
+                                                <th name="th_sl_no" class="text-left" style="width:9%"><span>Pos.</span></th>
+                                                <th name="th_description" class="text-left"><span>Beschreibung</span></th>
+                                                <th name="th_quantity" class="text-right" style="width:8%"><span>Menge</span></th>
+                                                <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:16%"><span>Einzelpreis</span></th>
+                                                <th name="th_subtotal" class="text-right" style="width:16%">
+                                                    <span groups="account.group_show_line_subtotals_tax_excluded">Preis in <span t-field="o.currency_id.name"/></span>
+                                                    <span groups="account.group_show_line_subtotals_tax_included">Preis in <span t-field="o.currency_id.name"/></span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice_tbody">
+                                            <t t-set="current_subtotal" t-value="0"/>
+                                            <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                                            <t t-foreach="lines" t-as="line">
+                                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                                <tr style="border-color:black;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                                    <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                                        <td name="sl_no_line"  style="width:9%;border-color:black;padding-bottom:0px"><span t-field="line.sl_no"/></td>
+                                                        <td name="account_invoice_line_name" style="border-color:black;padding-bottom:0px">
+                                                            <t t-if="line.product_id.default_code in ('woo_shipping_fees', 'woo_fees')">
+                                                                <t t-if="line.shipping_method_title">
+                                                                     <span t-field="line.shipping_method_title"/>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span>Versand: Versandkosten</span>
+                                                                </t>
+                                                            </t>
+                                                            <t t-if="line.product_id.default_code == 'woo_discount'">
+                                                                <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                            </t>
+                                                            <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                <strong><span t-field="line.product_id.name" t-options="{'widget': 'text'}"/></strong>
+                                                                <br/>
+                                                                <span>Produktcode: </span>
+                                                                <span t-field="line.product_id.default_code" t-options="{'widget': 'text'}"/>
+                                                                <!--Components Code-->
+                                                                <br/>
+                                                                <t t-set="components" t-value="o.get_components(line.product_id)"/>
+                                                                <t t-foreach="components" t-as="component">
+                                                                    <span style="color:white">Produktcode: </span><!--it's not showing it's used just to have the same space before code-->
+                                                                    <span t-esc="component.get('component_code')"/>&#160;<span class="carret"/>
+                                                                    <br/>
+                                                                </t>
+                                                            </t>
+                                                         </td>
+                                                        <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px">
+                                                            <span t-field="line.quantity"/>&#160;<span class="carret"/>
+                                                            <!--Components QTY-->
+                                                            <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                <br/><br/>
+                                                                <t t-foreach="components" t-as="component">
+                                                                    <span t-esc="'%.2f'% component.get('component_qty')"/>&#160;<span class="carret"/>
+                                                                    <br/>
+                                                                </t>
+                                                            </t>
+                                                        </td>
+                                                        <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:16%;border-color:black;padding-bottom:0px">
+                                                            <span class="text-nowrap" t-field="line.price_unit"/>
+                                                        </td>
+                                                        <td class="text-right o_price_total" style="width:16%;border-color:black;padding-bottom:0px">
+                                                            <span class="text-nowrap" t-esc="'%.2f'% line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                            <span class="text-nowrap" t-esc="'%.2f'% line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                        </td>
+                                                    </t>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix">
+                                        <!--<div id="total" class="row">-->
+                                        <div id="total" class="">
+                                            <!--<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">-->
+                                            <div>
+                                                <table class="table table-sm" style="page-break-inside: avoid;width:100%;">
+                                                    <!--Tax totals-->
+                                                    <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                                    <t t-if="o.payment_state == 'paid'">
+                                                        <t t-call="ourcustom_ever.document_tax_totals_invoice_paid"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-call="account.document_tax_totals"/>
+                                                    </t>
+
+                                                    <!--Payments-->
+                                                    <!--<t t-if="print_with_payments">
+                                                        <t t-if="o.payment_state != 'invoicing_legacy'">
+                                                            <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
+                                                            <t t-foreach="payments_vals" t-as="payment_vals">
+                                                                <tr>
+                                                                    <td>
+                                                                        <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']" t-options='{"widget": "date"}'/></i>
+                                                                    </td>
+                                                                    <td class="text-right">
+                                                                        <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                            <t t-if="len(payments_vals) > 0">
+                                                                <tr class="border-black">
+                                                                    <td><strong>Amount Due</strong></td>
+                                                                    <td class="text-right">
+                                                                        <span t-field="o.amount_residual"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                        </t>
+                                                    </t>-->
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                               </t>
+
+
+
+
+
+                                <br/><br/>
+
+
+                                <div name="footer_part">
+                                     <p><strong style="font-size:14px">Zahlungsbedingungen</strong></p>
+                                    <hr style="width:100%;border-color:black"/>
+                                    <p style="font-size:14px">
+                                        <strong>Herzlichen Dank für Ihren Auftrag.</strong> Bitte bezahlen Sie entweder per beigefügtem <strong>Einzahlungsschein</strong> oder überweisen Sie<br/>
+                                        den Rechnungsbetrag unter Angabe der <strong>Rechnungsnummer</strong> an: Eversmart products Handels GmbH | IBAN CH92 0900 0000 4149 3985 2
+                                        <br/>
+                                        Bitte beachten Sie, dass auf die Bestellung kein Widerrufsrecht besteht.
+                                    </p>
+                                </div>
+
+
+                                <div name="invoice_printed">
+                                    <!--Call Function to Set Invoice Printed = True in account.move-->
+                                    <span t-esc="o.set_invoice_printed()" />
+                                </div>
+
+                            </div>
+                    </t>
+               <!-- </t>-->
+           <!-- </t>-->
+    </template>
+
+
+
+    <!--    ############# PARTIAL DELIVERY TOTALS + TAXES #################    -->
+
+    <!-- TOTALS WHEN IT'S PARTIAL DELIVERY AND INVOICE NOT PAID -->
+    <template id="document_tax_totals_partial_not_paid">
+        <!-- BASED ON account.document_tax_totals + the EIDITS IN inherit_report_invoice_document.xml TO display TOTAL of DELIVERED PRODUCTS ONLY-->
+            <!--
+                Generic template to display tax totals in pdf reports.
+                Used by invoices, SO and PO.
+
+                ARGUMENTS:
+                - tax_totals: dict in the form generated by account.move's _get_tax_totals.
+            -->
+        <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+
+            <!-- #NO Need To Show This
+            <tr class="border-black o_subtotal">
+                <td style="width:9%;font-size:15px"><span/></td> <!-Before untaxed amount->
+                <td style="font-size:15px"><!-<strong t-esc="subtotal['name']"/>-><strong>Total</strong></td>
+                <td class="text-right" style="font-size:15px">
+                    <strong>
+                        <!-Taxed amount->
+                        <span t-att-class="oe_subtotal_footer_separator"
+                              t-esc="'%.2f'% total_delivered"
+                        />
+                    </strong>
+                </td>
+            </tr>-->
+
+            <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+            <!--TODO:Find a way to show taxes of delivered products only-->
+             <!--<t t-call="account.tax_groups_totals"/>-->
+        </t>
+
+        <tr class="border-black o_total">
+            <td style="width:9%;font-size:15px"><span/></td>  <!--Before Total-->
+            <td style="font-size:15px"><strong>Betrag inkl. MWST</strong></td>
+            <td style="font-size:15px" class="text-right">
+                <strong><span t-esc="'%.2f'% total_delivered"></span></strong>
+            </td>
+        </tr>
+        <!--These two tr just to add two line bellow Betrag inkl. MWST-->
+        <tr class="border-black o_total">
+            <td colspan="3" style="padding:1px"><span/></td>
+        </tr>
+        <tr class="border-black o_total">
+            <td colspan="3" style="padding:1px"><span/></td>
+        </tr>
+    </template>
+
+
+
+</odoo>

@@ -1,0 +1,627 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ourcustom_ever
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-26 15:33+0000\n"
+"PO-Revision-Date: 2022-05-26 15:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ourcustom_ever
+#: model:ir.actions.report,print_report_name:ourcustom_ever.invoice_qr_fin_id
+msgid "'Invoice - %s' % (object.name)"
+msgstr "'Rechnung - %s' % (object.name)"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "- E-mail:"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "- UID-Nummer:"
+msgstr "- UID-Nummer:"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "- Website:"
+msgstr "- Website:"
+
+#. module: ourcustom_ever
+#: code:addons/ourcustom_ever/models/res_partner.py:0
+#: code:addons/ourcustom_ever/models/res_partner.py:0
+#: code:addons/ourcustom_ever/models/res_partner.py:0
+#: code:addons/ourcustom_ever/models/res_partner.py:0
+#, python-format
+msgid "000000"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid ""
+"<br/>\n"
+"                                                            <span>Produktcode: </span>"
+msgstr ""
+"<br/>\n"
+"                                                            <span>Produktcode: </span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"myDiv\">Ihre Bestellung bei  </span>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Acceptance point</span>"
+msgstr "<span class=\"title\">Annahmestelle</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Account / Payable to</span><br/>"
+msgstr "<span class=\"title\">Konto / Zahlbar an</span><br/>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Amount</span><br/>"
+msgstr "<span class=\"title\">Betrag</span><br/>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Currency</span>"
+msgstr "<span class=\"title\">Währung</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Payable by</span>"
+msgstr "<span class=\"title\">Zahlbar durch</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span class=\"title\">Reference</span>"
+msgstr "<span class=\"title\">Referenz</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span> - Handelsregister-Nummer: CH-290.4.019.303-4</span>"
+msgstr "<span> - Handelsregister-Nummer: CH-290.4.019.303-4</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span>Beschreibung</span>"
+msgstr "<span>Beschreibung</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span>Einzelpreis</span>"
+msgstr "<span>Einzelpreis</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span>Menge</span>"
+msgstr "<span>Menge</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span>Payment part</span>"
+msgstr "<span>Zahlteil</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span>Pos.</span>"
+msgstr "<span>Pos.</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span>Receipt</span>"
+msgstr "<span>Empfangsschein</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<span>Versand: Versandkosten</span>"
+msgstr "<span>Versand: Versandkosten</span>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid ""
+"<strong style=\"font-size:13px;\">Herzlichen Dank für Ihren Auftrag. "
+"</strong>"
+msgstr ""
+"<strong style=\"font-size:13px;\">Herzlichen Dank für Ihren Auftrag. "
+"</strong>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid ""
+"<strong style=\"font-size:14px\">Eversmart Products Handels GmbH</strong>, "
+"Gesellschaft mit beschränkter Haftung mit einem Kapital von 20'000 CHF<br/>"
+msgstr ""
+"<strong style=\"font-size:14px\">Eversmart Products Handels GmbH</strong>, "
+"Gesellschaft mit beschränkter Haftung mit einem Kapital von 20'000 CHF<br/>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<strong style=\"font-size:14px\">Zahlungsbedingungen</strong>"
+msgstr "<strong style=\"font-size:14px\">Zahlungsbedingungen</strong>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "<strong><span style=\"font-size:18px\">Rechnung</span></strong>"
+msgstr "<strong><span style=\"font-size:18px\">Rechnung</span></strong>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_invoice_paid
+msgid "<strong>Betrag inkl. MWST</strong>"
+msgstr "<strong>Betrag inkl. MWST</strong>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid ""
+"<strong>Herzlichen Dank für Ihren Auftrag.</strong> Bitte bezahlen Sie entweder per beigefügtem <strong>Einzahlungsschein</strong> oder überweisen Sie<br/>\n"
+"                                            den Rechnungsbetrag unter Angabe der <strong>Rechnungsnummer</strong> an: Eversmart products Handels GmbH | IBAN CH92 0900 0000 4149 3985 2\n"
+"                                            <br/>\n"
+"                                            Bitte beachten Sie, dass auf die Bestellung kein Widerrufsrecht besteht."
+msgstr ""
+"<strong>Herzlichen Dank für Ihren Auftrag.</strong> Bitte bezahlen Sie entweder per beigefügtem <strong>Einzahlungsschein</strong> oder überweisen Sie<br/>\n"
+"                                            den Rechnungsbetrag unter Angabe der <strong>Rechnungsnummer</strong> an: Eversmart products Handels GmbH | IBAN CH92 0900 0000 4149 3985 2\n"
+"                                            <br/>\n"
+"                                            Bitte beachten Sie, dass auf die Bestellung kein Widerrufsrecht besteht."
+
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_invoice_paid
+msgid "<strong>Restbetrag</strong>"
+msgstr "<strong>Restbetrag</strong>"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_invoice_paid
+msgid "<strong>Total</strong>"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__barcode_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_stock_picking__barcode_printed
+msgid "BarCode Printed"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "Bezahlt"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "Datum:"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "Fulfillment.swiss, Eversmart, Isenrietstr.19, 8617 Mönchaltorf"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__id
+msgid "ID"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.actions.report,name:ourcustom_ever.invoice_qr_fin_id
+msgid "INVOICE"
+msgstr "RECHNUNG"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__invoice_payment_status
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__related_invoice_payment_status
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__invoice_payment_state
+msgid "Invoice Payment Status"
+msgstr "Rechnungsstatus"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__invoice_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__invoice_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__invoice_printed
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__invoice_printed
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__invoice_printed
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__invoice_printed
+msgid "Invoice Printed"
+msgstr "Rüstschein gedruckt"
+
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_report_ourcustom_ever_report_to_invoice_qr_fin
+msgid "Invoice QR FIN"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__invoice_to_print
+msgid "Invoice to print"
+msgstr "Auftrag druckbereit"
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_account_move
+msgid "Journal Entry"
+msgstr "Buchungssatz"
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_account_move_line
+msgid "Journal Item"
+msgstr "Buchungszeile"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "Kundennummer:"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_ourcustom_ever__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.external_layout_standard_ever
+msgid "Logo"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__invoice_payment_state__not_paid
+msgid "Not Paid"
+msgstr "Offen"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__payment_journal
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__payment_journal
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__payment_journal
+msgid "Payment Journal"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "Preis in"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.sale_order_tree_bulk_invoices
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.sale_order_tree_bulk_invoices_order
+msgid "Print Invoice"
+msgstr "Rüstschein"
+
+#. module: ourcustom_ever, woo_commerce_ept
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_sale_order_search_inherit_ever
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.view_order_product_customer_import_process_manual
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__process
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.fix_process_wizard_form
+msgid "Process"
+msgstr "Auftragsstatus"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "QR-bill for invoice"
+msgstr "QR-Rechnung für Rechnung"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_res_partner__ref
+#: model:ir.model.fields,field_description:ourcustom_ever.field_res_users__ref
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.ref_in_res_partner_tree
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_partner_search_inherit_ever
+msgid "Reference"
+msgstr "Referenz"
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_sale_order
+msgid "Sale Order"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Kundenauftragszeile"
+
+#. module: ourcustom_ever, woo_commerce_ept
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__shipped
+#: model:ir.model.fields.selection,name:woo_commerce_ept.selection__woo_order_data_queue_ept__queue_type__shipped
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__shipped
+msgid "Shipped"
+msgstr "Auftrag komplett"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move_line__shipping_method_title
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order_line__shipping_method_title
+msgid "Shipping Method"
+msgstr "Versandmethode"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__code_to_print
+msgid "Shipping barcode to print"
+msgstr "Versandbereit"
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_stock_picking
+msgid "Transfer"
+msgstr "Lieferung vornehmen"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__woo_lang_id
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__woo_lang_id
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__woo_lang_id
+msgid "Woo Instance Language"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__woo_payment_method
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__woo_payment_method
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__woo_payment_method
+msgid "Woo Payment Method"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_bank_statement_line__woo_payment_code
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_move__woo_payment_code
+#: model:ir.model.fields,field_description:ourcustom_ever.field_account_payment__woo_payment_code
+msgid "Woo Payment code"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "Zahlbar bis:"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.document_tax_totals_invoice_paid
+msgid "Zahlungseingang"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.tax_groups_totals_ever
+msgid "auf"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "bo"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "d-t"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "kg"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "lra"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model,name:ourcustom_ever.model_ourcustom_ever
+msgid "ourcustom_ever"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "pa"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "padding-top:6.2mm; padding-left:8.2mm; padding-right:8.2mm;"
+msgstr ""
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__invoice_payment_state__paid
+msgid "paid"
+msgstr "Bezahlt"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.report_to_invoice_qr_fin
+msgid "spe"
+msgstr ""
+
+
+
+
+
+
+
+
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.sale_order_tree_bulk_invoices
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.sale_order_tree_bulk_invoices_order
+msgid "Print Invoice (QR)"
+msgstr "Lieferschein"
+
+#. module: woo_commerce_ept
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_coupons_ept__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_customer_data_queue_line_ept__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_order_data_queue_ept__instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_order_data_queue_line_ept__instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_payment_gateway__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_process_import_export__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_product_attribute_ept__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_product_attribute_term_ept__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_product_categ_ept__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_product_data_queue_line_ept__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_product_product_ept__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_product_template_ept__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_sale_auto_workflow_configuration__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_tags_ept__woo_instance_id
+#: model:ir.model.fields,field_description:woo_commerce_ept.field_woo_webhook_ept__instance_id
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.common_log_book_search_view_ept
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.product_woo_attribute_search_view_ept
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.product_woo_attribute_term_search_view_ept
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.product_woo_categs_search_view_ept
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.product_woo_tags_search_view_ept
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.view_res_partner_filter_inh_ept
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.view_sale_order_search_inherit_ept
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.view_woo_coupon_data_queue_ept_filter
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.view_woo_order_data_queue_ept_filter
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.view_woo_payment_gateway_search
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.woo_coupons_ept_search_view
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.woo_customer_data_queue_ept_filter
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.woo_product_data_queue_ept_filter
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.woo_product_product_search_view_ept
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.woo_product_template_search_view_ept
+#: model_terms:ir.ui.view,arch_db:woo_commerce_ept.woo_sale_workflow_search_view_ept
+msgid "Instance"
+msgstr "Shop"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.order_btn_generate_labels
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.quotation_btn_generate_labels
+msgid "Generate Labels"
+msgstr "Label erstellen"
+
+#. module: print_attachments
+#: model_terms:ir.ui.view,arch_db:print_attachments.sale_order_tree_bulk_slip
+#: model_terms:ir.ui.view,arch_db:print_attachments.sale_order_tree_bulk_slip_order
+msgid "Print Delivery Slip"
+msgstr "Alle Label drucken"
+
+
+#. module: delivery_postlogistics
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__delivery_carrier__delivery_type__postlogistics
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__stock_package_type__package_carrier_type__postlogistics
+#: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
+msgid "PostLogistics"
+msgstr "Swiss Post Label"
+
+#. modules: delivery, product
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier__fixed_price
+#: model:ir.model.fields,field_description:product.field_product_pricelist_item__fixed_price
+#: model:ir.model.fields.selection,name:delivery.selection__delivery_carrier__delivery_type__fixed
+#: model:ir.model.fields.selection,name:product.selection__product_pricelist_item__compute_price__fixed
+msgid "Fixed Price"
+msgstr "Brief Post"
+
+#. modules: ourcustom_ever, stock
+#: model:ir.model.fields,field_description:ourcustom_ever.field_shipping_provider_wz__delivery_type
+#: model:ir.model.fields,field_description:stock.field_procurement_group__move_type
+msgid "Delivery Type"
+msgstr "Dienstleister"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.view_sale_order_search_inherit_ever
+msgid "Invoice Payment status"
+msgstr "Rechnungsstatus"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__invoice_payment_status__not_paid
+msgid "Not Paid"
+msgstr "Offen"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__invoice_payment_status__paid
+msgid "paid"
+msgstr "Bezahlt"
+
+#. module: ourcustom_ever
+#: model:ir.actions.act_window,name:ourcustom_ever.action_shipping_provider_wizard_form
+msgid "Generate shipping labels"
+msgstr "Label erstellen"
+
+#. modules: ourcustom_ever, stock
+#: model:ir.model.fields,field_description:ourcustom_ever.field_delivery_type__postlogistics
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__shipping_provider_wz__delivery_type__postlogistics
+msgid "PostLogistics"
+msgstr "Swiss Post Label"
+
+#. module: ourcustom_ever
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.invoice_ref_search_view
+msgid "Invoice Ref"
+msgstr "Rechnung Ref"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__invoice_refs
+msgid "Invoice ref"
+msgstr "Rechnung Ref"
+
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__new_order
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__new_order
+msgid "New Order"
+msgstr "Neuer Auftrag"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__ready_to_ship
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__ready_to_ship
+msgid "Ready to ship"
+msgstr "Versandbereit"
+
+#. module: ourcustom_ever
+#: model:ir.actions.act_window,name:ourcustom_ever.action_fix_process_wizard_form
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.fix_process_wizard_form
+msgid "Set Process"
+msgstr "Auftragsstatus festlegen"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__fix_process_wz__process_wz__partial_delivery
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__partial_delivery
+msgid "Partially Delivered"
+msgstr "Teilweise Versandbereit"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__nothing
+msgid "Nothing is deliverable"
+msgstr "Rückstände"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields.selection,name:ourcustom_ever.selection__sale_order__process__backorders
+msgid "Partial delivery"
+msgstr "Teillieferung"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__customer_status
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__related_customer_status
+#: model_terms:ir.ui.view,arch_db:ourcustom_ever.orders_group_by_fields
+msgid "Customer Status"
+msgstr "Kundenstatus"
+
+#. module: ourcustom_ever
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__related_with_without_note
+#: model:ir.model.fields,field_description:ourcustom_ever.field_sale_order__with_without_note
+msgid "Note"
+msgstr "Notiz"

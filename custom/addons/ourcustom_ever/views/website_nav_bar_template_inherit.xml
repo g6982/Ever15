@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+                         <!--       // PAGE HOME       -->
+    <!-- Hide Website top navbar for user name=kunde-->
+    <template id="disable_user_navbar" inherit_id="website.user_navbar" name="Disable User Navbar">
+        <!--Remove Top nav bar space for user-->
+        <xpath expr="//t[@t-set='body_classname']" position="replace">
+            <t t-if="request.env.user.name=='kunde'">
+                <t t-set="body_classname" t-value=""/>
+            </t>
+            <t t-else="">
+                <t t-set="body_classname" t-value="(body_classname if body_classname else '') + (' o_connected_user' if env['ir.ui.view'].user_has_groups('base.group_user') else '')"/>
+            </t>
+        </xpath>
+        <!--Hide Top navbar content-->
+        <xpath expr="//nav[@id='oe_main_menu_navbar']" position="attributes">
+            <attribute name="t-if">website and request.env.user.name!='kunde'</attribute>
+        </xpath>
+    </template>
+
+    <!-- ## Hide dropdown link "My Account"-->
+    <template id="hide_my_account_link" name="Link to frontend portal" inherit_id="portal.my_account_link">
+        <xpath expr="//a[@href='/my/home']" position="attributes">
+             <attribute name="t-if">request.env.user.name!='kunde'</attribute>
+        </xpath>
+    </template>
+    <template id="hide_user_dropdown_divider" name="Link to frontend portal" inherit_id="portal.user_dropdown">
+         <xpath expr="//*[@id='o_logout_divider']" position="attributes">
+              <attribute name="t-if">request.env.user.name!='kunde'</attribute>
+         </xpath>
+    </template>
+
+                        <!--        //PAGE Invoice Preview (/mt/invoices)-->
+
+    <!--Remove : "This is a preview of the kunde portal. Back to edit mode"-->
+    <template id="remove_frontend_layout_navbar" name="Main Frontend Layout" inherit_id="portal.frontend_layout">
+        <xpath expr="//div[@class='alert alert-info alert-dismissible rounded-0 fade show d-print-none css_editable_mode_hidden']" position="replace">
+             <!-- Remove For all -->
+        </xpath>
+    </template>
+
+
+    <!--Remove "Invoices" link from Invoive preview-->
+     <template id="portal_layout_inhever" name="Portal Layout" inherit_id="portal.portal_layout">
+        <xpath expr="//div[@class='o_portal container mt-3']" position="replace">
+             <!-- Remove For all -->
+        </xpath>
+     </template>
+
+    <!-- Link: /my/invoices template: "My Invoices and Payments" it's the page tha shows list of invoices , we will hide all content-->
+    <template id="portal_my_invoices_clear" name="My Invoices and Payments" inherit_id="account.portal_my_invoices">
+            <xpath expr="//t[@t-call='portal.portal_layout']" position="attributes">
+              <attribute name="t-if">request.env.user.name!='kunde'</attribute>
+            </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_reminder_billing,payment.reminder.billing.config,model_payment_reminder_config,account.group_account_invoice,1,1,1,0
+access_payment_reminder_billing_manager,payment.reminder.billing.manager.config,model_payment_reminder_config,account.group_account_manager,1,1,1,1
+
+
+
+
+
+
+
+
+
+
+

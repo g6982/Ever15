@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_form_qr_data" model="ir.ui.view">
+            <field name="name">invoice_form_qr_data</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@id='other_tab']/group[@id='other_tab_group']/group[@name='sale_info_group']/field[@name='partner_bank_id']" position="after">
+                    <field name="string_data_qr" readonly="1" invisible="1"/>
+                    <!--<field name="img_qr_path" readonly="1" invisible="1"/>-->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_line_shipping_method" model="ir.ui.view">
+            <field name="name">invoice.line.shipping.method</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='name']" position="after">
+                   <field name="shipping_method_title" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="sale_line_shipping_method" model="ir.ui.view">
+            <field name="name">sale.line.shipping.method</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='order_lines']/field[@name='order_line']/tree/field[@name='name']" position="after">
+                   <field name="shipping_method_title" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+    	<record id="action_download_stock_multi_labels" model="ir.actions.server">
+        	<field name="name">Download Delivery labels</field>
+        	<field name="model_id" ref="stock.model_stock_picking"/>
+        	<field name="state">code</field>
+        	<field name="binding_model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="code">action = records.generate_awb_pdf()</field>
+    	</record>
+
+
+		<!--In Sale Order-->
+        <!--QUOTATION-->
+         <record id="sale_order_tree_bulk_slip" model="ir.ui.view">
+            <field name="name">sale_order_tree_bulk_slip</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree">
+                    <header>
+                        <button
+                            name="generate_slips"
+                            string="Print Delivery Slip"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
+        <!--ORDER-->
+        <record id="sale_order_tree_bulk_slip_order" model="ir.ui.view">
+            <field name="name">sale_order_tree_bulk_slip_order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree">
+                    <header>
+                        <button
+                            name="generate_slips"
+                            string="Print Delivery Slip"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</odoo>

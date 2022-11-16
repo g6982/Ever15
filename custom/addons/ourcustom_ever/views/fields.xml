@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--QUOTATION TREE-->
+        <record id="quotation_tree_view_fields" model="ir.ui.view">
+            <field name="name">quotation_tree_view_fields</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='process']" position="after">
+                    <field name="shipped_with_optional" invisible="1"/>
+                    <field name="shipped_with"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_payment_status']" position="after">
+                     <field name="with_without_note"  widget="badge" decoration-info="with_without_note == 'with_note'"/>
+                     <field name="related_with_without_note" widget="badge" decoration-info="with_without_note == 'with_note'" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                     <field name="customer_status" decoration-success="customer_status == 'clear'" decoration-danger="customer_status == 'suspicious'" decoration-warning="customer_status == 'previous_order_not_paid'"/>
+                     <field name="related_customer_status" decoration-success="customer_status == 'clear'"  decoration-danger="customer_status == 'suspicious'" decoration-warning="customer_status == 'previous_order_not_paid'" invisible="1"/>
+                </xpath>
+                <!--make it optional = hide-->
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+            </field>
+        </record>
+
+         <!--ORDERS TREE-->
+        <record id="orders_tree_view_fields" model="ir.ui.view">
+            <field name="name">orders_tree_view_fields</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='process']" position="after">
+                    <field name="shipped_with_optional" invisible="1"/>
+                    <field name="shipped_with"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_payment_status']" position="after">
+                     <field name="with_without_note" widget="badge" decoration-info="with_without_note == 'with_note'"/>
+                     <field name="related_with_without_note" widget="badge" decoration-info="with_without_note == 'with_note'" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                     <field name="customer_status" decoration-success="customer_status == 'clear'"  decoration-danger="customer_status == 'suspicious'" decoration-warning="customer_status == 'previous_order_not_paid'"/>
+                     <field name="related_customer_status" decoration-success="customer_status == 'clear'"  decoration-danger="customer_status == 'suspicious'" decoration-warning="customer_status == 'previous_order_not_paid'" invisible="1"/>
+                </xpath>
+                <!--make it optional = hide-->
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+
+    <!--ORDERS FORM-->
+    <record id="orders_for_view_fields" model="ir.ui.view">
+        <field name="name">orders_for_view_fields</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+               <field name="backorder_exist" invisible="1" readonly="1"/>
+            </xpath>
+            <!--Replace the originl note by our_note -->
+            <xpath expr="//field[@name='note']" position="replace">
+                <field name="our_note"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--search Group by -->
+        <record id="orders_group_by_fields" model="ir.ui.view">
+            <field name="name">orders_group_by_fields</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="with_without_note"/>
+                    <field name="related_with_without_note"/>
+                    <separator/>
+
+                    <filter string="With Note" name="related_with_without_note"
+                        domain="[('related_with_without_note', '=', 'with_note')]"/>
+                    <filter string="Without Note" name="related_with_without_note"
+                        domain="[('related_with_without_note', '=', 'without_note')]"/>
+
+
+                    <group name="group_by_ever_fields" string="Group By Ever Fields">
+                        <filter string="Customer Status" name="related_customer_status" context="{'group_by':'related_customer_status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+</odoo>

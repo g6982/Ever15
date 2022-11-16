@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="gls_location_page" model="ir.ui.view">
+            <field name="name">Sales Order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Gls Locations">
+                        <field name="gls_location_ids" readonly="1">
+                            <tree nolabel="1" readonly="1">
+                                <field name="gls_location_parcelshopid"/>
+                                <field name="gls_location_name1"/>
+<!--                                <field name="gls_location_name2"/>-->
+                                <field name="gls_location_countrycode"/>
+                                <field name="gls_location_zipcode"/>
+                                <field name="gls_location_city"/>
+                                <field name="gls_location_street"/>
+                                <field name="gls_location_streetnumber"/>
+                                <button type='object' class="fa fa-arrow-right oe_link" name="set_location"
+                                        string="Use Location"/>
+                            </tree>
+                        </field>
+                        <group>
+                            <field name="gls_location_id" readonly="1"/>
+                            <button type='object' class="fa fa-arrow-right oe_link" name="get_locations"
+                                    string="Get Locations"/>
+
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

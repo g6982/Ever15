@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- this xml display selected quatation reason in sale order form  -->
+        <record id="view_quota_cancel_reason_form" model="ir.ui.view">
+                <field name="name">sale.order.form</field>
+                <field name="model">sale.order</field>
+                <field name="inherit_id" ref = "sale.view_order_form"/>	
+                <field name="arch" type="xml">
+                        <xpath expr ="//page[@name='order_lines']" position="inside">
+                                <label for="quota_cancel_reason_id"  attrs="{'invisible': [('state', 'in', ['draft', 'sent','sale', 'done'])]}"/>
+                                <strong attrs="{'invisible': [('state', 'in', ['draft', 'sent','sale', 'done'])]}"> : </strong>
+                                <field name="quota_cancel_reason_id" attrs="{'invisible': [('state', 'in', ['draft', 'sent','sale', 'done'])]}" nolabel="1"/>		
+                        </xpath>	
+                </field>
+        </record>
+</odoo>

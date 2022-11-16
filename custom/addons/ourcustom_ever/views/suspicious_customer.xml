@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data><!-- Suspicious Customer in Partner form-->
+        <record id="view_partner_form_suspicious_customer" model="ir.ui.view">
+            <field name="name">view_partner_form_suspicious_customer</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="suspicious_customer"/>
+                </xpath>
+                <xpath expr="//widget[@name='web_ribbon']" position="before">
+                    <widget
+                        name="web_ribbon"
+                        title="Suspicious Customer"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('suspicious_customer', '=', False)]}"
+                    />
+                </xpath>
+            </field>
+        </record>
+        <!-- Suspicious Customer in Sale Order form-->
+        <record id="view_order_form_suspicious_customer" model="ir.ui.view">
+            <field name="name">view_order_form_suspicious_customer</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="suspicious_customer" invisible="1"/>
+                </xpath>
+                <xpath expr="//sheet/div[@name='button_box']" position="after">
+                    <widget
+                        name="web_ribbon"
+                        title="Suspicious Customer"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('suspicious_customer', '=', False)]}"
+                    />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

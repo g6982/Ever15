@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Show Invoice Ref(ex:RE-0023) in Sale Order Tree/Form-->
+    <data>
+        <record id="invoice_ref_in_so_form" model="ir.ui.view">
+            <field name="name">invoice_ref_in_so_form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                   <field name="invoice_refs" /><!---TODO:invisible="1"-->
+                </xpath>
+            </field>
+        </record>
+    </data>
+    <!--ORDERS TREE-->
+    <record id="invoice_ref_in_so_tree" model="ir.ui.view">
+        <field name="name">invoice_ref_in_so_tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="invoice_refs" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--QUOTATION TREE-->
+    <record id="invoice_ref_in_sq_tree" model="ir.ui.view">
+        <field name="name">invoice_ref_in_sq_tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="invoice_refs" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--SEARCH BY-->
+    <record id="invoice_ref_search_view" model="ir.ui.view">
+        <field name="name">Search By Invoice Ref in SO</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="invoice_refs" string="Invoice Ref" filter_domain="[('invoice_refs','ilike', self)]"/>
+             </field>
+         </field>
+    </record>
+</odoo>

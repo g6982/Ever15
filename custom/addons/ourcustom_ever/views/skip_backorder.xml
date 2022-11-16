@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--This will allow the backorders to be created automatically
+        While validating the BL
+        without showing the popup "Create backorder" to users
+    -->
+    <record id="skip_backorder_view" model="ir.ui.view">
+        <field name="name">skip_backorder_view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='button_validate'][1]" position="attributes">
+              <attribute name="context">{'skip_backorder': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

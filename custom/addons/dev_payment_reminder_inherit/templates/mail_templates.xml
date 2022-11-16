@@ -1,0 +1,355 @@
+<?xml version="1.0"?>
+ <odoo>
+     <record id="7th_days_reminder_ip" model="mail.template">
+        <field name="name">7th Days Payment Reminder</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="email_from">{{object.company_id.email}}</field>
+        <field name="subject">Zahlungserinnerung</field>
+        <field name="partner_to">{{object.id}}</field>
+        <field name="auto_delete" eval="True"/>
+        <field name="lang">{{ object.due_invoice_ids.woo_lang_id.code }}</field>
+        <field name="body_html" type="html">
+            <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 14px; color: rgb(34, 34, 34); background-color: #FFF;">
+               <style>
+                    .text_capitalize_mod::first-letter{
+                        text-transform: capitalize !important;
+                   }
+                    .myDiv {
+                        display: inline-block;
+                        }
+               </style>
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Sehr geehrte/r <t t-out="object.name or ''"></t>, </p>
+
+                    <p>
+                        <br/>
+                        Wir kontaktieren Sie bezüglich: Ihre Bestellung bei <span class="text_capitalize_mod myDiv"><t class="text_capitalize_mod" t-out="object.woo_instance_id.sudo().name"/></span>&#160;
+                        <t t-if="len(object.due_invoice_ids) == 1">
+                            <!--Order REF-->
+                            <span><t t-out="object.due_invoice_ids.ref"/></span>
+                        </t>
+                        <t t-elif="len(object.due_invoice_ids) !=1">
+                            <t t-foreach="object.due_invoice_ids" t-as="line" >
+                                <span><t t-out="line.ref"/></span>&#160;
+                            </t>
+                        </t>
+
+                        <br/><br/>
+                        <!--If There is one invoice-->
+                        <t t-if="len(object.due_invoice_ids) == 1">
+                            Wir möchten Sie daran erinnern, dass die Rechnung Nr.
+                            <!--[Document Number]-->
+                            <t t-out="object.due_invoice_ids.name or ''"> </t>
+                            vom <!--[Date]-->
+                            <t t-out="object.due_invoice_ids.invoice_date" t-options='{"widget": "date","format": "dd.MM.yyyy"}'> </t>
+                            über <!--[Currency]-->
+                            <t t-out="object.due_invoice_ids.currency_id.name"> </t>
+                            <!--[Total]-->
+                            <t t-out="'%.2f'% object.due_invoice_ids.amount_residual"> </t>
+                            noch nicht beglichen ist.
+                           <br/><br/>
+
+                            Unter folgendem Link können Sie die Rechnung ansehen und bezahlen: <br/>
+                            <!--[Network Link]-->
+                            <!--<t t-out="object.due_invoice_ids.invoice_preview_link"/>-->
+                            <t t-set="preview_link" t-value="object.due_invoice_ids.invoice_preview_link" ></t>
+                            <a t-att-href="preview_link" t-out="preview_link" or="">
+                                <t t-out="object.due_invoice_ids.invoice_preview_link"></t>
+                            </a>
+                            <br/><br/>
+                        </t>
+                        <!--If There is more than one invoice show table-->
+                        <t t-if="len(object.due_invoice_ids) !=1">
+                            <p>Wir möchten Sie daran erinnern, dass die unten aufgeführten Rechnungen noch nicht bezahlt wurden.</p>
+                            <br/>
+                             <table  class="table table-condensed"  border="1" width="80%">
+                                <tr style='text-align:left;background:#e0e1e2;padding:5px;border-collapse: collapse'>
+                                      <th style='padding:5px'>Rechnung Nr.</th>
+                                      <th style='padding:5px'>Vom</th>
+                                      <th style='padding:5px'>Währung</th>
+                                      <th style='text-align:right;padding:5px'>Betrag</th>
+                                      <th style='text-align:center;padding:5px'>Link</th>
+                                </tr>
+                                <tr t-foreach="object.due_invoice_ids" t-as="line" >
+                                      <td style='padding:5px'>
+                                            <span t-esc="line.name"/>
+                                      </td>
+                                       <td style='padding:5px'>
+                                            <span t-esc="line.invoice_date" t-options='{"widget": "date","format": "dd.MM.yyyy"}'/>
+                                      </td>
+                                       <td style='padding:5px'>
+                                            <span t-esc="line.currency_id.name"/>
+                                      </td>
+                                       <td style='padding:5px;text-align:right'>
+                                            <span t-esc="'%.2f'% line.amount_residual"/>
+                                      </td>
+                                       <td style='padding:5px;text-align:right'>
+                                           <!--<span t-esc="line.invoice_preview_link"/>-->
+                                            <t t-set="preview_link" t-value="line.invoice_preview_link" ></t>
+                                            <a t-att-href="preview_link" t-out="preview_link" or="">
+                                                <t t-out="line.invoice_preview_link"></t>
+                                            </a>
+                                      </td>
+                                </tr>
+                            </table>
+                            <br/><br/>
+                        </t>
+                        Um die Rechnung herunterzuladen, geben Sie bitte ein:<br/>
+                        Login:kunde<br/>
+                        Kennwort:kunde
+                        <br/><br/>
+
+                        Wir danken Ihnen für eine Überweisung des ausstehenden Betrages innerhalb von <!--[Reminder Period]-->7 Tagen.
+                        <br/><br/>
+
+                        Sollte sich Ihre Zahlung mit unserer Mahnung gekreuzt haben, erachten Sie diese bitte als gegenstandslos.
+                        <br/><br/>
+
+                        Freundliche Grüsse
+                        <br/><br/>
+                        <!--[Company Name]-->
+                        <!--<t t-out="object.due_invoice_ids.company_id.name"> </t>-->
+                         eversmart products Handels GmbH
+                    </p>
+
+                   </div>
+            </field>
+     </record>
+
+    <record id="14th_days_reminder_ip" model="mail.template">
+        <field name="name">14th Days Payment Reminder</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="email_from">{{object.company_id.email}}</field>
+        <field name="subject">1. Mahnung</field>
+        <field name="partner_to">{{object.id}}</field>
+        <field name="auto_delete" eval="True"/>
+        <field name="lang">{{ object.due_invoice_ids.woo_lang_id.code }}</field>
+        <field name="body_html" type="html">
+            <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 14px; color: rgb(34, 34, 34); background-color: #FFF;">
+                <style>
+                    .text_capitalize_mod::first-letter{
+                        text-transform: capitalize !important;
+                   }
+                    .myDiv {
+                        display: inline-block;
+                        }
+               </style>
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Sehr geehrte/r <t t-out="object.name or ''"></t>, </p>
+                    <p>
+                        <br/>
+                       Wir kontaktieren Sie bezüglich: Ihre Bestellung bei <span class="text_capitalize_mod myDiv"><t class="text_capitalize_mod" t-out="object.woo_instance_id.sudo().name"/></span>&#160;
+                        <t t-if="len(object.due_invoice_ids) == 1">
+                            <!--Order REF-->
+                            <span><t t-out="object.due_invoice_ids.ref"/></span>
+                        </t>
+                        <t t-elif="len(object.due_invoice_ids) !=1">
+                            <t t-foreach="object.due_invoice_ids" t-as="line" >
+                                <span><t t-out="line.ref"/></span>,&#160;
+                            </t>
+                        </t>
+                        <br/><br/>
+                        <!--If There is one invoice-->
+                        <t t-if="len(object.due_invoice_ids) == 1">
+                            Trotz unserer früheren Mahnungen ist die Rechnung Nr.
+                            <!--[Document Number]-->
+                            <t t-out="object.due_invoice_ids.name or ''"> </t>
+                            vom
+                            <!--[Date]-->
+                            <t t-out="object.due_invoice_ids.invoice_date" t-options='{"widget": "date","format": "dd.MM.yyyy"}'> </t>
+                            über
+                            <!--[Currency]-->
+                            <t t-out="object.due_invoice_ids.currency_id.name"> </t>
+                            <!--[Total]-->
+                            <t t-out="'%.2f'% object.due_invoice_ids.amount_residual"> </t>
+                            noch nicht beglichen ist.
+                            <br/><br/>
+
+                            Unter folgendem Link können Sie die Rechnung ansehen und bezahlen:<br/>
+                            <!--[Network Link]-->
+                            <!--<t t-out="object.due_invoice_ids.invoice_preview_link"/>-->
+                            <t t-set="preview_link" t-value="object.due_invoice_ids.invoice_preview_link" ></t>
+                            <a t-att-href="preview_link" t-out="preview_link" or="">
+                                <t t-out="object.due_invoice_ids.invoice_preview_link"></t>
+                            </a>
+                            <br/><br/>
+
+                        </t>
+
+                        <!--If There is more than one invoice show table-->
+                        <t t-if="len(object.due_invoice_ids) !=1">
+                            <p>Wir verweisen auf die nachstehenden Rechnungen, leider haben wir noch keine Zahlung erhalten.</p>
+                            <br/>
+                             <table  class="table table-condensed"  border="1" width="80%">
+                                <tr style='text-align:left;background:#e0e1e2;padding:5px;border-collapse: collapse'>
+                                      <th style='padding:5px'>Rechnung Nr.</th>
+                                      <th style='padding:5px'>Vom</th>
+                                      <th style='padding:5px'>Währung</th>
+                                      <th style='text-align:right;padding:5px'>Betrag</th>
+                                      <th style='text-align:center;padding:5px'>Link</th>
+                                </tr>
+                                <tr t-foreach="object.due_invoice_ids" t-as="line" >
+                                      <td style='padding:5px'>
+                                            <span t-esc="line.name"/>
+                                      </td>
+                                       <td style='padding:5px'>
+                                            <span t-esc="line.invoice_date" t-options='{"widget": "date","format": "dd.MM.yyyy"}'/>
+                                      </td>
+                                       <td style='padding:5px'>
+                                            <span t-esc="line.currency_id.name"/>
+                                      </td>
+                                       <td style='padding:5px;text-align:right'>
+                                            <span t-esc="'%.2f'% line.amount_residual"/>
+                                      </td>
+                                       <td style='padding:5px;text-align:right'>
+                                          <!-- <span t-esc="line.invoice_preview_link"/>-->
+                                            <t t-set="preview_link" t-value="line.invoice_preview_link" ></t>
+                                            <a t-att-href="preview_link" t-out="preview_link" or="">
+                                                <t t-out="line.invoice_preview_link"></t>
+                                            </a>
+                                      </td>
+                                </tr>
+                            </table>
+                            <br/><br/>
+                        </t>
+                        Um die Rechnung herunterzuladen, geben Sie bitte ein:<br/>
+                        Login:kunde<br/>
+                        Kennwort:kunde
+                        <br/><br/>
+
+                         Ohne Ihren sofortigen gegenteiligen Bericht gehen wir davon aus, dass Sie mit diesem Saldo einverstanden sind.
+                            <br/>
+                        Wir fordern Sie nochmals auf, unser Guthaben innert <!---[Reminder Period]-->7 Tagen zu überweisen.
+                        <br/><br/>
+
+                        Freundliche Grüsse
+                        <br/><br/>
+
+                        <!--[Company Name]-->
+                       <!-- <t t-out="object.due_invoice_ids.company_id.name"> </t>-->
+                         eversmart products Handels GmbH
+                    </p>
+
+                   </div>
+            </field>
+     </record>
+
+    <record id="19th_days_reminder_ip" model="mail.template">
+        <field name="name">19th Days Payment Reminder</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="email_from">{{object.company_id.email}}</field>
+        <field name="subject">Letzte Mahnung</field>
+        <field name="partner_to">{{object.id}}</field>
+        <field name="auto_delete" eval="True"/>
+        <field name="lang">{{ object.due_invoice_ids.woo_lang_id.code }}</field>
+        <field name="body_html" type="html">
+            <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 14px; color: rgb(34, 34, 34); background-color: #FFF;">
+                <style>
+                    .text_capitalize_mod::first-letter{
+                        text-transform: capitalize !important;
+                   }
+                    .myDiv {
+                        display: inline-block;
+                        }
+                </style>
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Sehr geehrte/r <t t-out="object.name or ''"></t>, </p>
+                    <p>
+                        <br/>
+                        Wir kontaktieren Sie bezüglich: Ihre Bestellung bei <span class="text_capitalize_mod myDiv"><t class="text_capitalize_mod" t-out="object.woo_instance_id.sudo().name"/></span>&#160;
+                        <t t-if="len(object.due_invoice_ids) == 1">
+                            <!--Order REF-->
+                            <span><t t-out="object.due_invoice_ids.ref"/></span>
+                        </t>
+                        <t t-elif="len(object.due_invoice_ids) !=1">
+                            <t t-foreach="object.due_invoice_ids" t-as="line" >
+                                <span><t t-out="line.ref"/></span>,&#160;
+                            </t>
+                        </t>
+                        <br/><br/>
+                        <!--If There is one invoice-->
+                        <t t-if="len(object.due_invoice_ids) == 1">
+                            Wir beziehen uns auf die Rechnung Nr.
+                            <!--[Document Number]-->
+                            <t t-out="object.due_invoice_ids.name or ''"> </t>
+                            vom
+                            <t t-out="object.due_invoice_ids.invoice_date" t-options='{"widget": "date","format": "dd.MM.yyyy"}'> </t>
+                            <!--[Date]-->
+                            über
+                            <!--[Currency]-->
+                            <t t-out="object.due_invoice_ids.currency_id.name"> </t>
+                            <!--[Total]-->
+                            <t t-out="'%.2f'% object.due_invoice_ids.amount_residual"></t>.
+                            <br/>
+
+                            Leider konnten wir noch immer keinen Zahlungseingang feststellen.
+                            <br/><br/>
+
+                            Unter folgendem Link können Sie die Rechnung ansehen und bezahlen:<br/>
+                            <!--[Network Link]-->
+                            <!--<t t-out="object.due_invoice_ids.invoice_preview_link"/>-->
+                            <t t-set="preview_link" t-value="object.due_invoice_ids.invoice_preview_link" ></t>
+                            <a t-att-href="preview_link" t-out="preview_link" or="">
+                                <t t-out="object.due_invoice_ids.invoice_preview_link"></t>
+                            </a>
+                            <br/><br/>
+                        </t>
+
+                        <!--If There is more than one invoice show table-->
+                        <t t-if="len(object.due_invoice_ids) !=1">
+                            <p>Leider konnten wir den Zahlungseingang der nachstehenden Rechnungen noch nicht feststellen.</p>
+                            <br/>
+                             <table  class="table table-condensed"  border="1" width="80%">
+                                <tr style='text-align:left;background:#e0e1e2;padding:5px;border-collapse: collapse'>
+                                      <th style='padding:5px'>Rechnung Nr.</th>
+                                      <th style='padding:5px'>Vom</th>
+                                      <th style='padding:5px'>Währung</th>
+                                      <th style='text-align:right;padding:5px'>Betrag</th>
+                                      <th style='text-align:center;padding:5px'>Link</th>
+                                </tr>
+                                <tr t-foreach="object.due_invoice_ids" t-as="line" >
+                                      <td style='padding:5px'>
+                                            <span t-esc="line.name"/>
+                                      </td>
+                                       <td style='padding:5px'>
+                                            <span t-esc="line.invoice_date" t-options='{"widget": "date","format": "dd.MM.yyyy"}'/>
+                                      </td>
+                                       <td style='padding:5px'>
+                                            <span t-esc="line.currency_id.name"/>
+                                      </td>
+                                       <td style='padding:5px;text-align:right'>
+                                            <span t-esc="'%.2f'% line.amount_residual"/>
+                                      </td>
+                                       <td style='padding:5px;text-align:right'>
+                                           <!--<span t-esc="line.invoice_preview_link"/>-->
+                                            <t t-set="preview_link" t-value="line.invoice_preview_link" ></t>
+                                            <a t-att-href="preview_link" t-out="preview_link" or="">
+                                                <t t-out="line.invoice_preview_link"></t>
+                                            </a>
+                                      </td>
+                                </tr>
+                            </table>
+                            <br/><br/>
+                        </t>
+                        Um die Rechnung herunterzuladen, geben Sie bitte ein:<br/>
+                        Login:kunde<br/>
+                        Kennwort:kunde
+                        <br/><br/>
+
+                         Sollte der Betrag nicht innerhalb von <!--[Reminder Period]-->5 Tagen auf unserem Bankkonto eingegangen sein, sehen wir uns gezwungen, weitere Schritte zu veranlassen.
+                        <br/><br/>
+
+                        Freundliche Grüsse
+                        <br/><br/>
+
+                        <!--[Company Name]-->
+                        <!--<t t-out="object.due_invoice_ids.company_id.name"> </t>-->
+                        eversmart products Handels GmbH
+                    </p>
+
+                   </div>
+            </field>
+     </record>
+
+
+</odoo>

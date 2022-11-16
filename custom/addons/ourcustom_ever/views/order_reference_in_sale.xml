@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <!--ORDER-->
+        <record id="woo_order_ref_in_sale_tree" model="ir.ui.view">
+            <field name="name">woo_order_ref_in_sale_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="woo_order_id" string="Woo Order Ref"/>
+                </xpath>
+            </field>
+        </record>
+                    <!--Quotation-->
+        <record id="woo_order_ref_in_sale_tree_quot" model="ir.ui.view">
+            <field name="name">woo_order_ref_in_sale_tree_quot</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="woo_order_id" string="Woo Order Ref"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

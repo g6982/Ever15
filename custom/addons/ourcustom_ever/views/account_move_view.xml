@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--form-->
+        <record id="print_invoice_form" model="ir.ui.view">
+            <field name="name">ourcustom_ever.account.invoice.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@id='other_tab']/group[@id='other_tab_group']/group[@name='sale_info_group']/field[@name='partner_bank_id']" position="after">
+                    <field name="woo_payment_method" readonly="1"/>
+                    <field name="payment_journal" readonly="1"/>
+                    <field name="related_to_payment_journal" readonly="1" invisible="1"/>
+                </xpath>
+                <xpath expr="//button[@name='action_invoice_sent']" position="replace">
+                    <!--Remove Button 'Sent & Print'-->
+
+                </xpath>
+            </field>
+        </record>
+        <!--Groop By Payment Journal-->
+        <record id="view_account_filter_payment_journal" model="ir.ui.view">
+            <field name="name">view_account_filter_payment_journal</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/group/filter[@name='status']" position="after">
+                    <filter string="Payment Journal" name="related_to_payment_journal" context="{'group_by': 'related_to_payment_journal'}" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

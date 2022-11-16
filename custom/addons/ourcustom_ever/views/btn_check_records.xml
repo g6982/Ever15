@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!--In Sale Order-->
+        <!--Quotations-->
+         <record id="quotation_btn_check" model="ir.ui.view">
+            <field name="name">quotation_btn_check</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree">
+                    <header>
+                        <button
+                                name="return_view_of_selected_records"
+                                icon="fa-check-square-o"
+                                type="object"
+                                class="btn-secondary buttons_space"
+                            />
+                    </header>
+                </xpath>
+            </field>
+        </record>
+        <!--Orders-->
+        <record id="order_btn_check" model="ir.ui.view">
+            <field name="name">order_btn_check</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//tree">
+                    <header>
+                        <button
+                                name="return_view_of_selected_records"
+                                icon="fa-check-square-o"
+                                type="object"
+                                class="btn-secondary buttons_space"
+                            />
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</odoo>

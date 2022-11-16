@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_hr_expense_sheet_form_att_id" model="ir.ui.view">
+        <field name="name">view_hr_expense_sheet_form_att_id</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form" />
+        <field name="arch" type="xml">
+            <field name="employee_id" position="before">
+                <field name="attachment_id" />
+                <field name="attachment_name" />
+            </field>
+        </field>
+    </record>
+
+    <record id="link_att_button" model="ir.ui.view">
+            <field name="name">link_att_button</field>
+            <field name="model">hr.expense.sheet</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_dashboard_tree_header"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree">
+                    <header>
+                        <button
+                            name="link_attachment_to_expens"
+                            string="BTN Link Att"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                        <button
+                            name="action_submit_sheet"
+                            string="BTN STM"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                        <button
+                            name="approve_expense_sheets"
+                            string="BTN APP"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                        <button
+                            name="action_sheet_move_create"
+                            string="BTN Post"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                        <button
+                            name="action_set_Exp_paid"
+                            string="BTN SET EXP Paid"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                        <button
+                            name="action_set_rep_done"
+                            string="BTN SET REP Done"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                        <button
+                            name="process_unlinked_attachments"
+                            string="BTN NeW UNLINKED ATT"
+                            type="object"
+                            class="btn-primary buttons_space"
+                        />
+                    </header>
+                </xpath>
+            </field>
+</record>
+
+</odoo>

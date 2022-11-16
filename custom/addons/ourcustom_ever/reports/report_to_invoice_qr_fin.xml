@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <template id="report_to_invoice_qr_final">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <!--Invoice language will be based on site/instance language-->
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.woo_lang_id.code"/>
+                    <t t-call="ourcustom_ever.report_to_invoice_qr_fin" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+
+    <!--This calls the invoice and passing the qrurl id by file :report_to_invoice_qr_fin.py-->
+   <template id="report_to_invoice_qr_fin">
+            <!--<t t-call="web.html_container">-->
+               <!-- <t t-foreach="docs" t-as="o">-->
+                    <!--<t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.woo_lang_id.code"/>-->
+                    <t t-call="web.external_layout">
+                        <t t-set="o" t-value="o.with_context(lang='lang')" />
+                        <!--<t t-set="forced_vat" t-value="o.fiscal_position_id.foreign_vat"/>--> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
+                        <!--<t t-set="address">
+                            <p style="color:#38393b;text-decoration:underline;font-size:12px">Fulfillment.swiss, Eversmart, Isenrietstr.19, 8617 Mönchaltorf</p>
+                            <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                        </t>-->
+                        <div class="page" name="all_pages" style="">
+                            <div class="page" name="first_invoice_qr">
+                                <div name="address" style="width:80mm;height:45mm;">
+                                    <!--<t t-esc="address"/>-->
+                                    <p style="color:#38393b;text-decoration:underline;font-size:11px">Fulfillment.swiss, Eversmart, Isenrietstr.19, 8617 Mönchaltorf</p>
+                                    <span t-field="o.partner_id.name"/><br/>
+                                    <span t-field="o.partner_id.street"/>&#032;<span t-field="o.partner_id.street2"/><br/>
+                                    <span t-field="o.partner_id.zip"/>&#032;<span t-field="o.partner_id.city"/>&#032;<span t-field="o.partner_id.state_id"/><br/>
+                                    <span t-field="o.partner_id.country_id"></span>
+                                </div>
+
+                                <h2 style="margin-top:9px">
+                                    <strong><span style="font-size:18px;">Rechnung</span></strong>
+                                    <strong><span style="font-size:18px" t-if="o.name != '/'" t-field="o.name"/></strong>
+                                </h2>
+
+                                <style>
+                                    .text_capitalize_mod::first-letter{
+                                          text-transform: capitalize;
+                                    }
+
+                                    .myDiv {
+                                        display: inline-block;
+                                        font-weight:900;
+                                        }
+                                    .carret{
+                                        display:inline-block;
+                                        border:1px solid #595958;
+                                        width:12px;
+                                        height:12px;
+                                        }
+                                 </style>
+
+                                <!--Add borders to these informations bellow-->
+                                <table style="width:100%;border: 1px solid black;border-left:none;border-right:none">
+                                    <tr style="border: 1px solid black;border-left:none;border-right:none">
+                                        <td colspan="4" style="vertical-align:middle;">
+                                            <strong><span class="myDiv">Ihre Bestellung bei &#160;</span><span class="text_capitalize_mod myDiv"  t-field="o.woo_instance_id.sudo().name"/>&#160;<span t-field="o.ref"/></strong>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: 1px solid black;border-left:none;border-right:none;border-bottom:none">
+                                        <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                            <p name="invoice_date">Datum:</p>
+                                            <p name="customer_code" style="margin-top:-15px;margin-bottom:0px">Kundennummer:</p>
+                                        </td>
+                                        <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                            <p t-field="o.invoice_date" t-options='{"format": "dd.MM.yyyy"}'/>
+                                            <p style="margin-top:-15px;margin-bottom:0px" t-field="o.partner_id.ref"/>
+                                        </td>
+                                        <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                            <p name="due_date">Zahlbar bis:</p>
+                                        </td>
+                                        <!-- If The invoice is Paid show 'Paid' else show date-->
+                                        <t t-if="o.payment_state == 'paid'">
+                                            <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                                <p>Bezahlt</p>
+                                            </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td style="border-bottom:none;vertical-align:top;font-size:15px">
+                                                <p t-field="o.invoice_date_due" t-options='{"format": "dd.MM.yyyy"}'/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </table>
+
+                                    <!-- TABLE PRINCIPALE (Remimber there is 3 tables based on conditions) -->
+                                <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
+                                <t t-set="display_tax" t-value="any(l.tax_ids for l in o.invoice_line_ids)"/>
+
+                                <!-- Manage Partial Delivery
+                                    CHECK IF THE SaleOrder LINKED WAS A BACKORDER, TO ADD QTY DELIVERED & REMAINING AND CHOOSE TO SHOW ALL PRODUCTS OR JUST THE ONES DELIVERED-->
+                                <t t-set="back_check" t-value="o.its_a_backorder(o.id)"/>
+                                <t t-set="backorder_exist" t-value="back_check['backorder_exist']"/>
+
+                                <t t-if="backorder_exist == True">
+                                    <!--CASE 1: PAID  => Even if it's partial delivery, if the QR invoice is already paid we show just the normal table NOT CHANGES WITHIN IT-->
+                                    <t t-if="o.payment_state == 'paid'">
+                                        <table class="table table-sm o_main_table" name="back_invoice_line_table_paid" style="border-color:black;font-size:15px">
+                                            <thead>
+                                                <tr style="border-color:black">
+                                                    <th name="th_sl_no" class="text-left" style="border-top:black;width:9%"><span>Pos.</span></th>
+                                                    <th name="th_description" class="text-left" style="border-top:black;"><span>Beschreibung</span></th>
+                                                    <th name="th_quantity" class="text-right" style="border-top:black;width:8%"><span>Menge</span></th>
+                                                    <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border-top:black;width:16%"><span>Einzelpreis</span></th>
+                                                    <th name="th_subtotal" class="text-right" style="border-top:black;width:16%">
+                                                        <span groups="account.group_show_line_subtotals_tax_excluded">Preis in <span t-field="o.currency_id.name"/></span>
+                                                        <span groups="account.group_show_line_subtotals_tax_included">Preis in <span t-field="o.currency_id.name"/></span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice_tbody">
+                                                <t t-set="current_subtotal" t-value="0"/>
+                                                <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                                                <t t-foreach="lines" t-as="line">
+                                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                                    <tr style="border-color:black;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                                        <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                                            <td name="sl_no_line"  style="width:9%;border-color:black;padding-bottom:0px"><span t-field="line.sl_no"/></td>
+                                                            <td name="account_invoice_line_name" style="border-color:black;padding-bottom:0px">
+                                                                <t t-if="line.product_id.default_code in ('woo_shipping_fees', 'woo_fees')">
+                                                                    <t t-if="line.shipping_method_title">
+                                                                         <span t-field="line.shipping_method_title"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span>Versand: Versandkosten</span>
+                                                                    </t>
+                                                                </t>
+                                                                <t t-if="line.product_id.default_code == 'woo_discount'">
+                                                                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                                </t>
+                                                                <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                    <strong><span t-field="line.product_id.name" t-options="{'widget': 'text'}"/></strong>
+                                                                    <br/>
+
+                                                                    <span>Produktcode: </span>
+                                                                    <span t-field="line.product_id.default_code" t-options="{'widget': 'text'}"/>
+                                                                    <!--Components Code-->
+                                                                    <br/>
+                                                                    <t t-set="components" t-value="o.get_components(line.product_id)"/>
+                                                                    <t t-foreach="components" t-as="component">
+                                                                        <span style="color:white">Produktcode: </span><!--it's not showing it's used just to have the same space before code-->
+                                                                        <span t-esc="component.get('component_code')"/>&#160;<span class="carret"/>
+                                                                        <br/>
+                                                                    </t>
+                                                                </t>
+                                                             </td>
+                                                            <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px">
+                                                                <span t-field="line.quantity"/>&#160;<span class="carret"/>
+                                                                <!--Components QTY-->
+                                                                <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                    <br/><br/>
+                                                                    <t t-foreach="components" t-as="component">
+                                                                        <span t-esc="'%.2f'% component.get('component_qty')"/>&#160;<span class="carret"/>
+                                                                        <br/>
+                                                                    </t>
+                                                                </t>
+                                                            </td>
+                                                            <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:16%;border-color:black;padding-bottom:0px">
+                                                                <span class="text-nowrap" t-field="line.price_unit"/>
+                                                            </td>
+                                                            <td class="text-right o_price_total" style="width:16%;border-color:black;padding-bottom:0px">
+                                                                <span class="text-nowrap" t-esc="'%.2f'% line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                <span class="text-nowrap" t-esc="'%.2f'% line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                            </td>
+                                                        </t>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                        <div class="clearfix">
+                                            <!--<div id="total" class="row">-->
+                                            <div id="total" class="">
+                                                <!--<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">-->
+                                                <div>
+                                                    <table class="table table-sm" style="page-break-inside: avoid;width:100%;">
+                                                        <!--Tax totals-->
+                                                        <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                                        <t t-if="o.payment_state == 'paid'">
+                                                            <t t-call="ourcustom_ever.document_tax_totals_invoice_paid"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <t t-call="account.document_tax_totals"/>
+                                                        </t>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                       </div>
+                                    </t>
+
+                                    <!--CASE 2: NOT  PAID  => In Partial Delivery: If QR Invoice is NOT Paid yet we should show JUST DELIVERED PRODUCTS +Their totals+ Different quantities-->
+
+                                    <t t-if="o.payment_state != 'paid'">
+                                         <!--Total of Delivered Products-->
+                                        <t t-set="total_delivered" t-value="0"/>
+
+                                        <table class="table table-sm o_main_table" name="back_invoice_line_table_not_paid" style="border-color:black;font-size:15px">
+                                            <thead>
+                                                <tr style="border-color:black">
+                                                    <th name="th_sl_no" class="text-left" style="border-top:black;width:9%"><span>Pos.</span></th>
+                                                    <th name="th_description" class="text-left" style="border-top:black;"><span>Beschreibung</span></th>
+
+                                                    <!--Partial Delivery Changes-->
+                                                    <th name="th_quantity_ordered" class="text-right" style="border-top:black;width:8%"><span>Bestellt</span></th>
+                                                    <th name="th_quantity_delivered" class="text-right" style="border-top:black;width:8%"><span>Geliefret</span></th>
+                                                    <th name="th_quantity_remaining" class="text-right" style="border-top:black;width:8%"><span>Rückstand</span></th>
+                                                    <!--Partial Delivery FIN!-->
+
+                                                    <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border-top:black;width:14%"><span>Einzelpreis</span></th>
+
+                                                    <th t-if="display_tax" name="th_tax_group" class="text-center" style="border-top:black;width:8%"><span>MWST</span></th>
+
+                                                    <th name="th_subtotal" class="text-right" style="border-top:black;width:14%">
+                                                        <span groups="account.group_show_line_subtotals_tax_excluded">Preis in <span t-field="o.currency_id.name"/></span>
+                                                        <span groups="account.group_show_line_subtotals_tax_included">Preis in <span t-field="o.currency_id.name"/></span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice_tbody">
+                                                <t t-set="current_subtotal" t-value="0"/>
+                                                <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                                                <!--Manage Line Number: we will use this variable incremented instead of the default one: line.sl_no-->
+                                                <t t-set="line_number" t-value="1"/>
+
+                                                <t t-foreach="lines" t-as="line">
+                                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                                     <!--Partial Delivery Changes-->
+                                                    <t t-set="result" t-value="o.get_quantities(o.id,line.id)"/>
+                                                    <t t-set="delivered" t-value="result['delivered']"/>
+                                                    <t t-set="remaining" t-value="result['remaining']"/>
+                                                    <t t-set="total_of_delivered_products" t-value="result['total_of_delivered_products']"/>
+
+                                                     <!--We Will show product just if it has been delivered partially or completely-->
+                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'} and delivered > 0">
+                                                        <tr style="border-color:black;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                                            <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                                                <td name="sl_no_line"  style="width:9%;border-color:black;padding-bottom:0px"><span t-esc="line_number"/></td>
+                                                                <td name="account_invoice_line_name" style="border-color:black;padding-bottom:0px">
+                                                                    <t t-if="line.product_id.default_code in ('woo_shipping_fees', 'woo_fees')">
+                                                                        <t t-if="line.shipping_method_title">
+                                                                             <span t-field="line.shipping_method_title"/>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span>Versand: Versandkosten</span>
+                                                                        </t>
+                                                                    </t>
+                                                                    <t t-if="line.product_id.default_code == 'woo_discount'">
+                                                                        <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                                    </t>
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <strong><span t-field="line.product_id.name" t-options="{'widget': 'text'}"/></strong>
+                                                                        <br/>
+
+                                                                        <span>Produktcode: </span>
+                                                                        <span t-field="line.product_id.default_code" t-options="{'widget': 'text'}"/>
+                                                                        <!--Components Code-->
+                                                                        <br/>
+                                                                        <t t-set="components" t-value="o.get_components(line.product_id)"/>
+                                                                        <t t-foreach="components" t-as="component">
+                                                                            <span style="color:white">Produktcode: </span><!--it's not showing it's used just to have the same space before code-->
+                                                                            <span t-esc="component.get('component_code')"/>&#160;<span class="carret"/>
+                                                                            <br/>
+                                                                        </t>
+                                                                    </t>
+                                                                 </td>
+
+                                                                <!--Partial Delivery Changes-->
+
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_ordered">
+                                                                    <span t-field="line.quantity"/>
+                                                                    <!--Components QTY-->
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <br/><br/>
+                                                                        <t t-foreach="components" t-as="component">
+                                                                            <span t-esc="'%.2f'% component.get('component_qty')"/>&#160;<span class="carret"/>
+                                                                            <br/>
+                                                                        </t>
+                                                                    </t>
+                                                                </td>
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_delivered">
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                         <span t-esc="'%.2f'% delivered"/>&#160;<span class="carret"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span t-field="line.quantity"/>&#160;<span class="carret"/>
+                                                                    </t>
+                                                                </td>
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_remaining">
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <span t-esc="'%.2f'% remaining"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span>0.00</span>
+                                                                    </t>
+
+                                                                </td>
+                                                                <!--Partial Delivery FIN!-->
+
+                                                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:14%;border-color:black;padding-bottom:0px">
+                                                                    <span class="text-nowrap" t-field="line.price_unit"/>
+                                                                </td>
+
+                                                                <td t-if="display_tax" name="td_tax_group"  style="width:8%;border-color:black;padding-bottom:0px" class="text-center">
+                                                                    <t t-foreach="line.tax_ids" t-as="tax">
+                                                                        <span t-esc="tax.amount"/><sapn>%</sapn>&#160;
+                                                                         <!--Manage Translate of TVA-->
+                                                                        <!--<t t-if="o.woo_lang_id.code == 'de_DE'">
+                                                                            <span t-esc="tax.tax_group_id.name.replace('TVA', 'MWST')"/>&#160;
+                                                                        </t>
+                                                                        <t t-elif="o.woo_lang_id.code == 'en_US'">
+                                                                            <span t-esc="tax.tax_group_id.name.replace('TVA', 'VAT')"/>&#160;
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span  t-esc="tax.tax_group_id.name"/>&#160;
+                                                                        </t>-->
+                                                                    </t>
+                                                                </td>
+
+                                                                <td class="text-right o_price_total" style="width:14%;border-color:black;padding-bottom:0px">
+                                                                    <t t-if="delivered == line.quantity">
+                                                                        <span class="text-nowrap" t-esc="'%.2f'% line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                        <span class="text-nowrap" t-esc="'%.2f'% line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                                    </t>
+                                                                    <t t-if="delivered != line.quantity">
+                                                                        <span t-esc="'%.2f'% total_of_delivered_products"/>
+                                                                    </t>
+                                                                </td>
+
+                                                                 <!--UPDATE Total of Delivered Products-->
+                                                                <t t-if="delivered == line.quantity">
+                                                                    <t t-set="total_delivered" t-value="total_delivered+line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                    <t t-set="total_delivered" t-value="total_delivered+line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                                </t>
+                                                                <t t-if="delivered != line.quantity">
+                                                                     <t t-set="total_delivered" t-value="total_delivered+total_of_delivered_products"/>
+                                                                </t>
+
+                                                            </t>
+                                                        </tr>
+                                                         <!--Manage Line Number:-->
+                                                         <t t-set="line_number" t-value="line_number + 1"/>
+                                                    </t>
+                                                    <!--If it's just a discount or shipping line just show it without checking qty-->
+                                                    <t t-elif="line.product_id.default_code in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                        <tr style="border-color:black;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                                            <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                                                <td name="sl_no_line"  style="width:9%;border-color:black;padding-bottom:0px"><span t-esc="line_number"/></td>
+                                                                <td name="account_invoice_line_name" style="border-color:black;padding-bottom:0px">
+                                                                    <t t-if="line.product_id.default_code in ('woo_shipping_fees', 'woo_fees')">
+                                                                        <t t-if="line.shipping_method_title">
+                                                                             <span t-field="line.shipping_method_title"/>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span>Versand: Versandkosten</span>
+                                                                        </t>
+                                                                    </t>
+                                                                    <t t-if="line.product_id.default_code == 'woo_discount'">
+                                                                        <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                                    </t>
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <strong><span t-field="line.product_id.name" t-options="{'widget': 'text'}"/></strong>
+                                                                        <br/>
+
+                                                                        <span>Produktcode: </span>
+                                                                        <span t-field="line.product_id.default_code" t-options="{'widget': 'text'}"/>
+                                                                        <!--Components Code-->
+                                                                        <br/>
+                                                                        <t t-set="components" t-value="o.get_components(line.product_id)"/>
+                                                                        <t t-foreach="components" t-as="component">
+                                                                            <span style="color:white">Produktcode: </span><!--it's not showing it's used just to have the same space before code-->
+                                                                            <span t-esc="component.get('component_code')"/>&#160;<span class="carret"/>
+                                                                            <br/>
+                                                                        </t>
+                                                                    </t>
+                                                                 </td>
+
+                                                                <!--Partial Delivery Changes-->
+
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_ordered">
+                                                                    <span t-field="line.quantity"/>
+                                                                    <!--Components QTY-->
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <br/><br/>
+                                                                        <t t-foreach="components" t-as="component">
+                                                                            <span t-esc="'%.2f'% component.get('component_qty')"/>&#160;<span class="carret"/>
+                                                                            <br/>
+                                                                        </t>
+                                                                    </t>
+                                                                </td>
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_delivered">
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                         <span t-esc="'%.2f'% delivered"/>&#160;<span class="carret"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span t-field="line.quantity"/>&#160;<span class="carret"/>
+                                                                    </t>
+                                                                </td>
+                                                                <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px" name="qty_remaining">
+                                                                    <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                        <span t-esc="'%.2f'% remaining"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span>0.00</span>
+                                                                    </t>
+
+                                                                </td>
+                                                                <!--Partial Delivery FIN!-->
+
+                                                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:14%;border-color:black;padding-bottom:0px">
+                                                                    <span class="text-nowrap" t-field="line.price_unit"/>
+                                                                </td>
+
+                                                                <td t-if="display_tax" name="td_tax_group"  style="width:8%;border-color:black;padding-bottom:0px" class="text-center">
+                                                                    <t t-foreach="line.tax_ids" t-as="tax">
+                                                                        <span t-esc="tax.amount"/><sapn>%</sapn>&#160;
+                                                                         <!--Manage Translate of TVA-->
+                                                                        <!--<t t-if="o.woo_lang_id.code == 'de_DE'">
+                                                                            <span t-esc="tax.tax_group_id.name.replace('TVA', 'MWST')"/>&#160;
+                                                                        </t>
+                                                                        <t t-elif="o.woo_lang_id.code == 'en_US'">
+                                                                            <span t-esc="tax.tax_group_id.name.replace('TVA', 'VAT')"/>&#160;
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <span  t-esc="tax.tax_group_id.name"/>&#160;
+                                                                        </t>-->
+                                                                    </t>
+                                                                </td>
+
+                                                                <td class="text-right o_price_total" style="width:14%;border-color:black;padding-bottom:0px">
+                                                                    <span class="text-nowrap" t-esc="'%.2f'% line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                    <span class="text-nowrap" t-esc="'%.2f'% line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                                </td>
+
+                                                                 <!--UPDATE Total of Delivered Products-->
+                                                                <t t-set="total_delivered" t-value="total_delivered+line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                                <t t-set="total_delivered" t-value="total_delivered+line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                            </t>
+                                                        </tr>
+                                                        <!--Manage Line Number:-->
+                                                         <t t-set="line_number" t-value="line_number + 1"/>
+                                                    </t>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                        <div class="clearfix">
+                                            <!--<div id="total" class="row">-->
+                                            <div id="total" class="">
+                                                <!--<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">-->
+                                                <div>
+                                                    <table class="table table-sm" style="page-break-inside: avoid;width:100%;">
+                                                        <!--Tax totals-->
+                                                        <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                                        <t t-if="o.payment_state == 'paid'">
+                                                            <t t-call="ourcustom_ever.document_tax_totals_invoice_paid"/>
+                                                        </t>
+                                                       <!-- <t t-else="">
+                                                            <t t-call="account.document_tax_totals"/>
+                                                        </t>-->
+                                                        <t t-else="">
+                                                            <t t-call="ourcustom_ever.document_tax_totals_partial_not_paid"/>
+                                                        </t>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </t>
+
+                                <!--ELSE : NORMAL TABLE (No Bakorder  -> No partial delivery managed)-->
+                               <t t-if="backorder_exist == False">
+                                   <table class="table table-sm o_main_table" name="invoice_line_table" style="border-color:black;font-size:15px">
+                                        <thead>
+                                            <tr style="border-color:black">
+                                                <th name="th_sl_no" class="text-left" style="border-top:black;width:9%"><span>Pos.</span></th>
+                                                <th name="th_description" class="text-left" style="border-top:black;"><span>Beschreibung</span></th>
+                                                <th name="th_quantity" class="text-right" style="border-top:black;width:8%"><span>Menge</span></th>
+                                                <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border-top:black;width:16%"><span>Einzelpreis</span></th>
+                                                <th name="th_subtotal" class="text-right" style="border-top:black;width:16%">
+                                                    <span groups="account.group_show_line_subtotals_tax_excluded">Preis in <span t-field="o.currency_id.name"/></span>
+                                                    <span groups="account.group_show_line_subtotals_tax_included">Preis in <span t-field="o.currency_id.name"/></span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice_tbody">
+                                            <t t-set="current_subtotal" t-value="0"/>
+                                            <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                                            <t t-foreach="lines" t-as="line">
+                                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                                <tr style="border-color:black;" t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                                    <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                                        <td name="sl_no_line"  style="width:9%;border-color:black;padding-bottom:0px"><span t-field="line.sl_no"/></td>
+                                                        <td name="account_invoice_line_name" style="border-color:black;padding-bottom:0px">
+                                                            <t t-if="line.product_id.default_code in ('woo_shipping_fees', 'woo_fees')">
+                                                                <t t-if="line.shipping_method_title">
+                                                                     <span t-field="line.shipping_method_title"/>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span>Versand: Versandkosten</span>
+                                                                </t>
+                                                            </t>
+                                                            <t t-if="line.product_id.default_code == 'woo_discount'">
+                                                                <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                            </t>
+                                                            <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                <strong><span t-field="line.product_id.name" t-options="{'widget': 'text'}"/></strong>
+                                                                <br/>
+
+                                                                <span>Produktcode: </span>
+                                                                <span t-field="line.product_id.default_code" t-options="{'widget': 'text'}"/>
+                                                                <!--Components Code-->
+                                                                <br/>
+                                                                <t t-set="components" t-value="o.get_components(line.product_id)"/>
+                                                                <t t-foreach="components" t-as="component">
+                                                                    <span style="color:white">Produktcode: </span><!--it's not showing it's used just to have the same space before code-->
+                                                                    <span t-esc="component.get('component_code')"/>&#160;<span class="carret"/>
+                                                                    <br/>
+                                                                </t>
+                                                            </t>
+                                                         </td>
+                                                        <td class="text-right" style="width:8%;border-color:black;padding-bottom:0px">
+                                                            <span t-field="line.quantity"/>&#160;<span class="carret"/>
+                                                            <!--Components QTY-->
+                                                            <t t-if="line.product_id.default_code not in {'woo_shipping_fees','woo_fees','woo_discount'}">
+                                                                <br/><br/>
+                                                                <t t-foreach="components" t-as="component">
+                                                                    <span t-esc="'%.2f'% component.get('component_qty')"/>&#160;<span class="carret"/>
+                                                                    <br/>
+                                                                </t>
+                                                            </t>
+                                                        </td>
+                                                        <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:16%;border-color:black;padding-bottom:0px">
+                                                            <span class="text-nowrap" t-field="line.price_unit"/>
+                                                        </td>
+                                                        <td class="text-right o_price_total" style="width:16%;border-color:black;padding-bottom:0px">
+                                                            <span class="text-nowrap" t-esc="'%.2f'% line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                            <span class="text-nowrap" t-esc="'%.2f'% line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                        </td>
+                                                    </t>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                   <div class="clearfix">
+                                        <!--<div id="total" class="row">-->
+                                        <div id="total" class="">
+                                            <!--<div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">-->
+                                            <div>
+                                                <table class="table table-sm" style="page-break-inside: avoid;width:100%;">
+                                                    <!--Tax totals-->
+                                                    <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                                    <t t-if="o.payment_state == 'paid'">
+                                                        <t t-call="ourcustom_ever.document_tax_totals_invoice_paid"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-call="account.document_tax_totals"/>
+                                                    </t>
+                                                </table>
+                                            </div>
+                                        </div>
+                                   </div>
+                               </t>
+
+
+
+                                <br/><br/>
+
+                                <div name="footer_part">
+                                     <p><strong style="font-size:14px">Zahlungsbedingungen</strong></p>
+                                    <hr style="width:100%;border-color:black"/>
+                                    <p style="font-size:14px">
+                                        <strong>Herzlichen Dank für Ihren Auftrag.</strong> Bitte bezahlen Sie entweder per beigefügtem <strong>Einzahlungsschein</strong> oder überweisen Sie<br/>
+                                        den Rechnungsbetrag unter Angabe der <strong>Rechnungsnummer</strong> an: Eversmart products Handels GmbH | IBAN CH92 0900 0000 4149 3985 2
+                                        <br/>
+                                        Bitte beachten Sie, dass auf die Bestellung kein Widerrufsrecht besteht.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <!-- ############### QR CODE ##################-->
+
+                            <t t-if="o.move_type == 'out_invoice' and o.l10n_ch_currency_name in ['EUR', 'CHF']  and o.payment_state != 'paid' and o.woo_payment_code == 'cheque'">
+                                <p style="page-break-after:always;">  </p>
+                                <div name="Qr">
+                                    <style>
+                                        .swissqr_section_title {
+                                            font-weight:bold;
+                                            font-size:16px;
+                                        }
+                                        .swissqr_text {
+                                            font-size:12px;
+                                        }
+                                        .title {
+                                            font-weight:bold;
+                                        }
+                                        div#currency_amount {
+                                            display:inline-block;
+                                        }
+                                        .horizontal_scissors {
+                                            position: absolute;
+                                            margin-top:-20px;
+                                            width:20px;
+                                            height:20px;
+                                        }
+                                        .vertical_scissors_bas {
+                                            position: absolute;
+                                            width:20px;
+                                            height:20px;
+                                            margin-left:-20px;
+                                            margin-top:90px;
+                                        }
+
+                                    </style>
+                                    <!-- add class to body tag -->
+                                    <!--<script>document.body.className += " l10n_ch_qr";</script>-->
+                                    <!-- add default margin for header (matching A4 European margin) -->
+                                   <!-- <t t-set="report_header_style">padding-top:6.2mm; padding-left:8.2mm; padding-right:8.2mm;</t>-->
+
+                                    <t t-set="formated_amount" t-value="'{:,.2f}'.format(o.amount_residual).replace(',','\xa0')"/>
+                                    <div class="">
+                                        <span style="font-size:25px">QR-bill for invoice <t t-esc="o.name"/></span>
+                                    </div>
+                                    <br/>
+                                    <div name="empty" style="min-height:380px"></div>
+                                    <!--####table qr-->
+                                    <table style="border:2px dotted gray;width:100%">
+                                        <tr style="border:2px dotted gray;">
+                                            <td style="border:1px dotted gray;vertical-align:top;width:30%;padding:8px">
+                                                <img src="/l10n_ch/static/src/img/scissors_h.png" class="scissors horizontal_scissors"/>
+                                                <div class="swissqr_receipt">
+
+                                            <!--<img src="/l10n_ch/static/src/img/scissors_h.png" class="scissors horizontal_scissors"/>-->
+
+                                            <div id="receipt_title_zone" class="swissqr_section_title">
+                                                <span>Receipt</span>
+                                            </div>
+                                              <br/>
+                                            <div id="receipt_indication_zone" class="receipt_indication_zone">
+
+                                                <div class="swissqr_text title">
+                                                    <span class="title">Account / Payable to</span><br/>
+                                                </div>
+                                                <div class="swissqr_text content">
+                                                    <span t-field="o.partner_bank_id.acc_number" t-if="not o.partner_bank_id.l10n_ch_qr_iban"/>
+                                                    <span t-field="o.partner_bank_id.l10n_ch_qr_iban" t-if="o.partner_bank_id.l10n_ch_qr_iban"/>
+                                                    <br/>
+                                                    <span t-field="o.company_id.name"/><br/>
+                                                    <span t-field="o.company_id.street"/><br/>
+                                                    <span t-field="o.company_id.country_id.code"/>
+                                                    <span t-field="o.company_id.zip"/>
+                                                    <span t-field="o.company_id.city"/><br/>
+                                                    <br/>
+                                                </div>
+
+                                                <t t-if="o.partner_bank_id.l10n_ch_qr_iban">
+                                                    <div class="swissqr_text title">
+                                                        <span class="title">Reference</span>
+                                                    </div>
+                                                    <div class="swissqr_text content">
+                                                        <span t-esc="o.space_qrr_reference(o.payment_reference)"/><br/>
+                                                        <br/>
+                                                    </div>
+                                                </t>
+
+                                                <div class="swissqr_text title">
+                                                    <span class="title">Payable by</span>
+                                                </div>
+                                                <div class="swissqr_text content">
+                                                    <span t-field="o.partner_id.commercial_partner_id.name"/><br/>
+                                                    <span t-field="o.partner_id.street"/>
+                                                    <span t-field="o.partner_id.street2"/><br/>
+                                                    <span t-field="o.partner_id.country_id.code"/>
+                                                    <span t-field="o.partner_id.zip"/>
+                                                    <span t-field="o.partner_id.city"/>
+                                                </div>
+
+                                            </div>
+                                                    <br/><br/><br/>
+                                            <div id="receipt_amount_zone" class="swissqr_column_left receipt_amount_zone">
+                                                <div class="swissqr_text">
+                                                    <div class="column" id="currency_amount">
+                                                        <div class="title">
+                                                            <span class="title">Currency</span>
+                                                        </div>
+                                                        <div class="content">
+                                                            <span t-field="o.currency_id.name"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="column" id="currency_amount" style="padding-left:10px">
+                                                        <div class="title">
+                                                            <span class="title">Amount</span><br/>
+                                                        </div>
+                                                        <div class="content">
+                                                            <t t-if="backorder_exist == True">
+                                                                <t t-if="total_delivered">
+                                                                    <!--Total Amount of delivered products-->
+                                                                    <span t-esc="'%.2f'% total_delivered"/>
+                                                                </t>
+                                                                <t t-else="">
+                                                                     <span t-esc="formated_amount"/>
+                                                                </t>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <span t-esc="formated_amount"/>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                    <br/>
+
+                                            <div id="receipt_acceptance_point_zone" class="receipt_acceptance_point_zone">
+                                                <div class="swissqr_text content" style="float:right">
+                                                    <span class="title">Acceptance point</span>
+                                                </div>
+                                            </div>
+                                                    <br/><br/>
+
+                                        </div>
+                                            </td>
+
+                                            <td style="border:1px dotted gray;vertical-align:top;width:30%;padding:8px;border-right:hidden">
+                                                <div class="swissqr_body">
+
+                                            <!--<img src="/l10n_ch/static/src/img/scissors_v.png" class="scissors vertical_scissors"/>-->
+
+                                            <div class="swissqr_column_left">
+
+                                                <div class="swissqr_section_title">
+                                                    <span>Payment part</span>
+                                                </div>
+                                                <br/>
+
+                                                <!-- //ORIGINAL line
+                                                <img class="swissqr" t-att-src="qr_code_urls[o.id]"/>
+                                                -->
+
+                                                <img class="swissqr" t-att-src="o.string_data_qr" style="width:180px;height:180px"/>
+                                                <!--<img class="swissqr" t-att-src="o.img_qr_path"/>-->
+                                              <!--  <img class="swissqr" src="/ourcustom_ever/static/src/img/test.png"/>-->
+<!--
+<img style="max-height: 60px;" alt="Logo" src="data:image/png;base64,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"/>
+-->
+                                                <br/><br/>
+                                                <div id="amount_zone" class="amount_zone">
+                                                    <div class="swissqr_text">
+                                                        <div class="column" id="currency_amount">
+                                                            <div class="title">
+                                                                <span class="title">Currency</span>
+                                                            </div>
+                                                            <div class="content">
+                                                                <span t-field="o.currency_id.name"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="column" id="currency_amount" style="padding-left:10px">
+                                                            <div class="title">
+                                                                <span class="title">Amount</span><br/>
+                                                            </div>
+                                                            <div class="content">
+                                                                <t t-if="backorder_exist == True">
+                                                                    <t t-if="total_delivered">
+                                                                        <!--Total Amount of delivered products-->
+                                                                        <span t-esc="'%.2f'% total_delivered"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                         <span t-esc="formated_amount"/>
+                                                                    </t>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span t-esc="formated_amount"/>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <img src="/ourcustom_ever/static/src/img/scissors_vb.png" class="scissors vertical_scissors_bas"/>
+                                        </div>
+
+                                            </td>
+                                        <td style="border:1px dotted gray;vertical-align:top;width:40%;padding:8px">
+                                            <div id="indications_zone" class="swissqr_column_right">
+                                                <div class="swissqr_text title">
+                                                    <span class="title">Account / Payable to</span><br/>
+                                                </div>
+                                                <div class="swissqr_text content">
+                                                    <span t-field="o.partner_bank_id.acc_number" t-if="not o.partner_bank_id.l10n_ch_qr_iban"/>
+                                                    <span t-field="o.partner_bank_id.l10n_ch_qr_iban" t-if="o.partner_bank_id.l10n_ch_qr_iban"/>
+                                                    <br/>
+                                                    <span t-field="o.company_id.name"/><br/>
+                                                    <span t-field="o.company_id.street"/><br/>
+                                                    <span t-field="o.company_id.country_id.code"/>
+                                                    <span t-field="o.company_id.zip"/>
+                                                    <span t-field="o.company_id.city"/><br/>
+                                                    <br/>
+                                                </div>
+
+                                                <t t-if="o.partner_bank_id.l10n_ch_qr_iban">
+                                                    <div class="swissqr_text title">
+                                                        <span class="title">Reference</span>
+                                                    </div>
+                                                    <div class="swissqr_text content">
+                                                        <span t-esc="o.space_qrr_reference(o.payment_reference)"/><br/>
+                                                        <br/>
+                                                    </div>
+                                                </t>
+
+                                                <!-- ADDITIONAL INFO
+                                                <t t-set="additional_info" t-value="(o.ref or o.name if o.partner_bank_id.l10n_ch_qr_iban else o.payment_reference or o.ref or o.name)"/>
+                                                <t t-if="additional_info">
+                                                    <div class="swissqr_text title">
+                                                        <span class="title">Additional information</span>
+                                                    </div>
+                                                    <div class="swissqr_text content">
+                                                        <span t-esc="additional_info"/><br/>
+                                                        <br/>
+                                                    </div>
+                                                </t>-->
+
+                                                <div class="swissqr_text title">
+                                                    <span class="title">Payable by</span>
+                                                </div>
+                                                <div class="swissqr_text content">
+                                                    <span t-field="o.partner_id.commercial_partner_id.name"/><br/>
+                                                    <span t-field="o.partner_id.street"> </span>
+                                                    <span t-field="o.partner_id.street2"/><br/>
+                                                    <span t-field="o.partner_id.country_id.code"/>
+                                                    <span t-field="o.partner_id.zip"/>
+                                                    <span t-field="o.partner_id.city"/><br/>
+                                                    <br/>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        </tr>
+                                    </table>
+                                    <!--####table qr-->
+                                <!--
+                                ORIGINAL QR
+                                    <div class="swissqr_content_v2">
+                                        <div class="swissqr_receipt">
+
+                                            <img src="/l10n_ch/static/src/img/scissors_h.png" class="scissors horizontal_scissors"/>
+
+                                            <div id="receipt_title_zone" class="swissqr_section_title">
+                                                <span>Receipt</span>
+                                            </div>
+
+                                            <div id="receipt_indication_zone" class="receipt_indication_zone">
+
+                                                <div class="swissqr_text title">
+                                                    <span class="title">Account / Payable to</span><br/>
+                                                </div>
+                                                <div class="swissqr_text content">
+                                                    <span t-field="o.partner_bank_id.acc_number" t-if="not o.partner_bank_id.l10n_ch_qr_iban"/>
+                                                    <span t-field="o.partner_bank_id.l10n_ch_qr_iban" t-if="o.partner_bank_id.l10n_ch_qr_iban"/>
+                                                    <br/>
+                                                    <span t-field="o.company_id.name"/><br/>
+                                                    <span t-field="o.company_id.street"/><br/>
+                                                    <span t-field="o.company_id.country_id.code"/>
+                                                    <span t-field="o.company_id.zip"/>
+                                                    <span t-field="o.company_id.city"/><br/>
+                                                    <br/>
+                                                </div>
+
+                                                <t t-if="o.partner_bank_id.l10n_ch_qr_iban">
+                                                    <div class="swissqr_text title">
+                                                        <span class="title">Reference</span>
+                                                    </div>
+                                                    <div class="swissqr_text content">
+                                                        <span t-esc="o.space_qrr_reference(o.payment_reference)"/><br/>
+                                                        <br/>
+                                                    </div>
+                                                </t>
+
+                                                <div class="swissqr_text title">
+                                                    <span class="title">Payable by</span>
+                                                </div>
+                                                <div class="swissqr_text content">
+                                                    <span t-field="o.partner_id.commercial_partner_id.name"/><br/>
+                                                    <span t-field="o.partner_id.street"/>
+                                                    <span t-field="o.partner_id.street2"/><br/>
+                                                    <span t-field="o.partner_id.country_id.code"/>
+                                                    <span t-field="o.partner_id.zip"/>
+                                                    <span t-field="o.partner_id.city"/>
+                                                </div>
+
+                                            </div>
+
+                                            <div id="receipt_amount_zone" class="swissqr_column_left receipt_amount_zone">
+                                                <div class="swissqr_text">
+                                                    <div class="column">
+                                                        <div class="title">
+                                                            <span class="title">Currency</span>
+                                                        </div>
+                                                        <div class="content">
+                                                            <span t-field="o.currency_id.name"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="column">
+                                                        <div class="title">
+                                                            <span class="title">Amount</span><br/>
+                                                        </div>
+                                                        <div class="content">
+                                                            <span t-esc="formated_amount"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="receipt_acceptance_point_zone" class="receipt_acceptance_point_zone">
+                                                <div class="swissqr_text content">
+                                                    <span class="title">Acceptance point</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="swissqr_body">
+
+                                            <!-<img src="/l10n_ch/static/src/img/scissors_v.png" class="scissors vertical_scissors"/>->
+
+                                            <div class="swissqr_column_left">
+
+                                                <div class="swissqr_section_title">
+                                                    <span>Payment part</span>
+                                                </div>
+
+                                                <!- //ORIGINAL line
+                                                <img class="swissqr" t-att-src="qr_code_urls[o.id]"/>
+                                                ->
+
+                                                <img class="swissqr" t-att-src="o.string_data_qr"/>
+                                                <!-<img class="swissqr" t-att-src="o.img_qr_path"/>->
+                                              <!-  <img class="swissqr" src="/ourcustom_ever/static/src/img/test.png"/>->
+<!-
+<img style="max-height: 60px;" alt="Logo" src="data:image/png;base64,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"/>
+->
+                                                <div id="amount_zone" class="amount_zone">
+                                                    <div class="swissqr_text">
+                                                        <div class="column">
+                                                            <div class="title">
+                                                                <span class="title">Currency</span>
+                                                            </div>
+                                                            <div class="content">
+                                                                <span t-field="o.currency_id.name"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="column">
+                                                            <div class="title">
+                                                                <span class="title">Amount</span><br/>
+                                                            </div>
+                                                            <div class="content">
+                                                                <span t-esc="formated_amount"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div id="indications_zone" class="swissqr_column_right">
+                                                <div class="swissqr_text title">
+                                                    <span class="title">Account / Payable to</span><br/>
+                                                </div>
+                                                <div class="swissqr_text content">
+                                                    <span t-field="o.partner_bank_id.acc_number" t-if="not o.partner_bank_id.l10n_ch_qr_iban"/>
+                                                    <span t-field="o.partner_bank_id.l10n_ch_qr_iban" t-if="o.partner_bank_id.l10n_ch_qr_iban"/>
+                                                    <br/>
+                                                    <span t-field="o.company_id.name"/><br/>
+                                                    <span t-field="o.company_id.street"/><br/>
+                                                    <span t-field="o.company_id.country_id.code"/>
+                                                    <span t-field="o.company_id.zip"/>
+                                                    <span t-field="o.company_id.city"/><br/>
+                                                    <br/>
+                                                </div>
+
+                                                <t t-if="o.partner_bank_id.l10n_ch_qr_iban">
+                                                    <div class="swissqr_text title">
+                                                        <span class="title">Reference</span>
+                                                    </div>
+                                                    <div class="swissqr_text content">
+                                                        <span t-esc="o.space_qrr_reference(o.payment_reference)"/><br/>
+                                                        <br/>
+                                                    </div>
+                                                </t>
+
+                                                <!- ADDITIONAL INFO
+                                                <t t-set="additional_info" t-value="(o.ref or o.name if o.partner_bank_id.l10n_ch_qr_iban else o.payment_reference or o.ref or o.name)"/>
+                                                <t t-if="additional_info">
+                                                    <div class="swissqr_text title">
+                                                        <span class="title">Additional information</span>
+                                                    </div>
+                                                    <div class="swissqr_text content">
+                                                        <span t-esc="additional_info"/><br/>
+                                                        <br/>
+                                                    </div>
+                                                </t>->
+
+                                                <div class="swissqr_text title">
+                                                    <span class="title">Payable by</span>
+                                                </div>
+                                                <div class="swissqr_text content">
+                                                    <span t-field="o.partner_id.commercial_partner_id.name"/><br/>
+                                                    <span t-field="o.partner_id.street"> </span>
+                                                    <span t-field="o.partner_id.street2"/><br/>
+                                                    <span t-field="o.partner_id.country_id.code"/>
+                                                    <span t-field="o.partner_id.zip"/>
+                                                    <span t-field="o.partner_id.city"/><br/>
+                                                    <br/>
+                                                </div>
+                                            </div>
+                                            <style>
+                                                    .vertical_scissors_bas {
+                                                        position: absolute;
+                                                        top: 113mm ;
+                                                        left: -5mm;
+                                                    }
+                                            </style>
+                                            <img src="/ourcustom_ever/static/src/img/scissors_vb.png" class="scissors vertical_scissors_bas"/>
+                                        </div>
+                                    </div>
+
+                                    -->
+                                </div>
+                            </t>
+
+                            <!--################ QR CODE FIN! ##################-->
+
+                            <div name="invoice_printed">
+                                <!--Call Function to Set Invoice QR Printed = True in account.move-->
+                                <span t-esc="o.set_invoice_qr_printed()" />
+                            </div>
+                        </div>
+                    </t>
+               <!-- </t>-->
+           <!-- </t>-->
+    </template>
+
+
+    <!-- TAX IN STATE PAID-->
+            <template id="document_tax_totals_invoice_paid">
+            <!--Based on the original account.document_tax_totals to add :
+                Paid on and Rest to pay if invoice state is 'Paid'
+            -->
+            <!--
+                Generic template to display tax totals in pdf reports.
+                Used by invoices, SO and PO.
+
+                ARGUMENTS:
+                - tax_totals: dict in the form generated by account.move's _get_tax_totals.
+            -->
+            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+               <!-- <tr class="border-black o_subtotal">
+                    <td><strong t-esc="subtotal['name']"/></td>
+
+                    <td class="text-right">
+                        <span
+                            t-att-class="oe_subtotal_footer_separator"
+                            t-esc="subtotal['formatted_amount']"
+                        />
+                    </td>
+                </tr>-->
+                <tr class="border-black o_subtotal">
+                    <td style="width:9%;font-size:15px"><span/></td> <!--Before untaxed amount-->
+                    <td style="font-size:15px"><!--<strong t-esc="subtotal['name']"/>--><strong>Total</strong></td>
+                    <td class="text-right" style="font-size:15px">
+                        <!-- its a string with currency
+                        <span
+                            t-att-class="oe_subtotal_footer_separator"
+                            t-esc="subtotal['formatted_amount']"
+                        />-->
+                        <strong>
+                            <!--ORG: Untaxed amount-->
+                           <!-- <span
+                            t-att-class="oe_subtotal_footer_separator"
+                            t-esc="'%.2f'% subtotal['amount']"
+                            />-->
+                            <!--Taxed amount-->
+                            <span t-att-class="oe_subtotal_footer_separator"
+                                  t-esc="'%.2f'% tax_totals['amount_total']"
+                            />
+                        </strong>
+                    </td>
+                </tr>
+
+
+                <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                <t t-call="account.tax_groups_totals" t-lang="o.woo_lang_id.code"/>
+
+            </t>
+
+            <!--Total amount with all taxes-->
+            <!--<tr class="border-black o_total">
+                <td><strong>Total</strong></td>
+                <td class="text-right">
+                    <span t-esc="tax_totals['formatted_amount_total']"/>
+                </td>
+            </tr>-->
+            <tr class="border-black o_total" position="replace">
+                <tr class="border-black o_total">
+                    <td style="width:9%;font-size:15px"><span/></td>  <!--Before Total-->
+                    <td style="font-size:15px"><strong>Betrag inkl. MWST</strong></td>
+                    <td style="font-size:15px" class="text-right">
+                        <!--<span t-esc="tax_totals['formatted_amount_total']"/> its a string with currency-->
+                        <strong><span t-esc="'%.2f'% tax_totals['amount_total']"/></strong>
+                    </td>
+                </tr>
+                <!--Paid On-->
+                <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
+                <t t-foreach="payments_vals" t-as="payment_vals">
+                    <tr class="border-black o_total" style="border-top:none !important">
+                        <td style="width:9%;font-size:15px;border-top:none !important"><span/></td>  <!--Before Total-->
+                        <td style="font-size:15px;border-top:none !important">
+                            <span class="">Zahlungseingang <t t-esc="payment_vals['date']" t-options='{"widget": "date","format": "dd.MM.yyyy"}'/></span>
+                        </td>
+                        <td class="text-right" style="font-size:15px;border-top:none !important">
+                            -<span t-esc="'%.2f'% payment_vals['amount']"/>
+                        </td>
+                    </tr>
+                </t>
+
+                <tr class="border-black o_total" name="rest_to_pay">
+                    <td style="width:9%;font-size:15px"><span/></td>
+                    <td style="font-size:15px"><strong>Restbetrag</strong></td>
+                    <td style="font-size:15px" class="text-right">
+                        <strong><span t-esc="'%.2f'% o.amount_residual_signed"/></strong>
+                    </td>
+
+                </tr>
+                <!--These two tr just to add two line bellow Betrag inkl. MWST-->
+                <tr class="border-black o_total">
+                    <td colspan="3" style="padding:1px"><span/></td>
+                </tr>
+                <tr class="border-black o_total">
+                    <td colspan="3" style="padding:1px"><span/></td>
+                </tr>
+            </tr>
+
+        </template>
+
+
+
+</odoo>

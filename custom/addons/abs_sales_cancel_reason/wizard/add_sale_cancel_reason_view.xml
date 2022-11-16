@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_add_cancel_reason_form" model="ir.ui.view">
+	<field name="name">add.quotation.reason.form</field>
+	<field name="model">add.quotation.reason</field>
+	<field name="arch" type="xml">
+	    <form string="Add Quoation Cancel Reason">
+		    <group>
+		        <field name="quota_cancel_reason_id"/>
+		    </group>
+		    <footer> 
+			    <button string='Cancel Quotation' name='cancel_quotation' type='object' class='btn-primary' />
+			    <button string='Cancel' class='btn-default' special="cancel"/>
+	        </footer>				
+	    </form>
+	</field>
+	</record>
+
+</odoo>
